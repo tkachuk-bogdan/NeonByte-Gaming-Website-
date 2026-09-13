@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Assignment #1: HTML & CSS Basics | Team: [TEAM NAME] | Group: [GROUP] | Page by: Bogdan Tkachuk -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeonByte Gaming - Join / Contact</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <header id="main-header">
+    <div class="logo">Neon<span>Byte</span></div>
+    <nav class="nav-menu">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="games.html">Games</a></li>
+        <li><a href="contact.html" class="active">Join / Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="container">
+    <h1>Join The Squad</h1>
+    <p>Ready to compete? Fill out the registration form below and our
+      team captains will reach out with your squad invite and next
+      tournament slot.</p>
+
+    <h2>About Your Page Developer</h2>
+    <p><strong>Bogdan Tkachuk</strong> built this registration form and
+      the games page for the club. When not organizing brackets,
+      Bogdan Tkachuk streams casual runs and tests new indie games.</p>
+    <ul>
+      <li>Favorite role: In-game shot caller</li>
+      <li>Years in competitive gaming: 3</li>
+    </ul>
+
+    <h2 id="contact-form">Registration Form</h2>
+    <form action="#" method="post">
+      <label for="name">Full Name / Gamer Tag</label>
+      <input type="text" id="name" name="name" placeholder="Enter your name or gamer tag" required>
+
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+
+      <label for="game">Main Game Category</label>
+      <select id="game" name="game">
+        <option value="shooter">Tactical Shooter</option>
+        <option value="moba">MOBA</option>
+        <option value="racing">Racing &amp; Sports Sim</option>
+        <option value="rpg">RPG &amp; Co-op</option>
+      </select>
+
+      <label for="teamcolor">Pick Your Squad Color</label>
+      <input type="color" id="teamcolor" name="teamcolor" value="#7c3aed">
+
+      <fieldset>
+        <legend>Preferred Play Style</legend>
+        <input type="radio" id="competitive" name="play-style" value="competitive" checked>
+        <label for="competitive" class="radio-label">Competitive / Ranked</label>
+
+        <input type="radio" id="casual" name="play-style" value="casual">
+        <label for="casual" class="radio-label">Casual / Fun</label>
+      </fieldset>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="Tell us your rank, availability, or anything else..."></textarea>
+
+      <button type="submit">Send Registration</button>
+    </form>
+
+    <h3>Other Ways to Reach Us</h3>
+    <ul>
+      <li>Email: squad@neonbytegaming.example</li>
+      <li>Discord: discord.gg/neonbyte</li>
+      <li>Office Hours: Mon-Fri, 9:00 AM - 6:00 PM</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 NeonByte Gaming Club. Assignment #1 Project.</p>
+    <p>Team Members: Bekzat Kuatbekov &amp; Bogdan Tkachuk</p>
+  </footer>
+
+</body>
+</html>
