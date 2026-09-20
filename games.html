@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Assignment #1: HTML & CSS Basics | Team: [TEAM NAME] | Group: [GROUP] | Page by: Bogdan Tkachuk -->
+  <!-- Assignment #2: Advanced CSS (Flexbox & Grid) | Team: Bogdan | Group: SE-2511 | Page by: Bogdan Tkachuk -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NeonByte Gaming - Games &amp; Tournaments</title>
@@ -9,7 +9,9 @@
 </head>
 <body>
 
-  <header id="main-header">
+<div class="page-grid">
+
+  <header id="main-header" class="grid-header">
     <div class="logo">Neon<span>Byte</span></div>
     <nav class="nav-menu">
       <ul>
@@ -21,7 +23,25 @@
     </nav>
   </header>
 
-  <section class="container">
+  <aside class="sidebar grid-sidebar">
+    <div class="sidebar-block">
+      <h3>Game Categories</h3>
+      <ul class="sidebar-list">
+        <li>Tactical Shooters</li>
+        <li>MOBA</li>
+        <li>Racing &amp; Sports Sims</li>
+        <li>RPG &amp; Co-op</li>
+      </ul>
+    </div>
+    <div class="sidebar-block highlight">
+      <h3>Next Up</h3>
+      <p><strong>NeonByte Clash</strong><br>Tactical Shooter &middot; 5v5 Single Elimination</p>
+      <p class="prize">Prize Pool: 50,000 KZT</p>
+    </div>
+    <a href="contact.html" class="btn sidebar-btn">Register Your Squad</a>
+  </aside>
+
+  <main class="grid-main">
     <h1>Games &amp; Tournaments</h1>
     <p>We run ranked ladders and one-off cups across several game
       categories. Pick your game below and check the tournament
@@ -36,16 +56,17 @@
     </ul>
 
     <h2>Tournament Schedule</h2>
-    <table id="pricing-table">
-      <thead>
+    <div class="table-scroll">
+      <table id="pricing-table">
+        <thead>
         <tr>
           <th>Tournament</th>
           <th>Game Category</th>
           <th>Format</th>
           <th>Prize Pool (KZT)</th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <tr>
           <td>NeonByte Clash</td>
           <td>Tactical Shooter</td>
@@ -64,8 +85,9 @@
           <td>Cooperative Boss Run</td>
           <td>20,000</td>
         </tr>
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+    </div>
 
     <h3>How Registration Works</h3>
     <ol>
@@ -73,12 +95,14 @@
       <li>Register your squad using the form on the Contact page.</li>
       <li>Check-in 15 minutes before your scheduled match slot.</li>
     </ol>
-  </section>
+  </main>
 
-  <footer>
-    <p>&copy; 2026 NeonByte Gaming Club. Assignment #1 Project.</p>
+  <footer class="grid-footer">
+    <p>&copy; 2026 NeonByte Gaming Club. Assignment #2 Project.</p>
     <p>Team Members: Bekzat Kuatbekov &amp; Bogdan Tkachuk</p>
   </footer>
+
+</div>
 
 </body>
 </html>
