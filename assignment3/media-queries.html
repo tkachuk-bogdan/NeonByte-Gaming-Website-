@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <!-- Assignment #3: Media Queries + Bootstrap Grid | Team: Bogdan | Group: SE-2511 | Page by: Bogdan Tkachuk -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeonByte Gaming - Media Queries</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/media.css">
+</head>
+<body class="d-flex flex-column min-vh-100">
+
+<a class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2" href="#main">Skip to main content</a>
+
+<!-- Task 5: Bootstrap navbar (collapses into a hamburger below lg) -->
+<nav class="navbar navbar-expand-lg bg-dark border-bottom border-2 border-primary sticky-top py-3" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4" href="index.html">Neon<span class="text-info">Byte</span></a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto gap-lg-2 mt-3 mt-lg-0 fw-semibold">
+        <li class="nav-item"><a class="nav-link rounded px-3" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3" href="games.html">Games</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3" href="contact.html">Join / Contact</a></li>
+        <li class="nav-item"><a class="nav-link active rounded px-3" aria-current="page" href="media-queries.html">Media Queries</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="flex-grow-1">
+
+  <!-- Part 1, Task 1: Responsive typography (pure CSS media queries, see css/media.css) -->
+  <section class="mq-section mq-typography" aria-labelledby="mq-type-title">
+    <p class="mq-badge">Current layout: </p>
+    <h1 id="mq-type-title">Responsive Typography</h1>
+    <h2>Font size changes with the screen width</h2>
+    <p>This text is controlled only by CSS media queries in <code>css/media.css</code>.
+      On mobile the headings and paragraphs are small, on a tablet they become medium,
+      and on a desktop they are the largest. Resize the browser window to see it change.</p>
+    <p>Breakpoints used: mobile is the default (below 768px), tablet starts at 768px,
+      desktop starts at 992px.</p>
+  </section>
+
+  <!-- Part 1, Task 2: Card group (only CSS media queries, no Bootstrap classes) -->
+  <section class="mq-section" aria-labelledby="mq-cards-title">
+    <h2 id="mq-cards-title" class="mq-title">Card Group</h2>
+    <p class="mq-text">Desktop: three cards side by side. Tablet: two in a row. Mobile: stacked vertically.</p>
+
+    <div class="mq-cards">
+      <article class="mq-card">
+        <img src="../images/im3.jpg" alt="Tactical shooter game scene on a monitor" class="mq-card-img">
+        <h3>Tactical Shooters</h3>
+        <p>5v5 ranked scrims every week with in-house coaching.</p>
+        <a href="games.html" class="mq-card-link">See Schedule</a>
+      </article>
+      <article class="mq-card">
+        <img src="../images/im4.jpg" alt="Racing game controller and steering wheel setup" class="mq-card-img">
+        <h3>Racing &amp; Sports</h3>
+        <p>Weekend cups for racing and sports sim fans of all skill levels.</p>
+        <a href="games.html" class="mq-card-link">See Schedule</a>
+      </article>
+      <article class="mq-card">
+        <img src="../images/im5.jpg" alt="Fantasy role playing game character on screen" class="mq-card-img">
+        <h3>RPG &amp; Co-op</h3>
+        <p>Guild raids, dungeon runs, and story nights with the squad.</p>
+        <a href="games.html" class="mq-card-link">See Schedule</a>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer class="bg-dark border-top border-2 border-primary text-center py-4 px-3 mt-auto">
+  <div class="container">
+    <p class="small text-body-secondary mb-1">&copy; 2026 NeonByte Gaming Club. Assignment #3 Project.</p>
+    <p class="small text-body-secondary mb-0">Team Members: Bekzat Kuatbekov &amp; Bogdan Tkachuk</p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

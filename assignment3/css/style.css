@@ -1,0 +1,176 @@
+/* =========================================================
+   NeonByte Gaming - Assignment #3 (Bootstrap 5 version)
+   This file ONLY re-colours Bootstrap to keep our neon palette.
+   All layout comes from the Bootstrap grid, and ALL margins /
+   paddings come from Bootstrap spacing utilities (m-*, p-*).
+
+   Palette (same as Assignment 1-2):
+   - Background (deep space):  #12101c
+   - Panel background:         #1c1930
+   - Border:                   #322a52
+   - Primary accent (neon):    #7c3aed
+   - Secondary accent (cyan):  #22d3ee
+   - Text (light):             #e8e6f0
+   ========================================================= */
+
+/* ---------- Bootstrap CSS variables -> our palette ---------- */
+:root[data-bs-theme="dark"] {
+    --bs-body-font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
+    --bs-body-bg: #12101c;
+    --bs-body-bg-rgb: 18, 16, 28;
+    --bs-body-color: #e8e6f0;
+    --bs-body-color-rgb: 232, 230, 240;
+    --bs-secondary-color: #a8a3bd;           /* muted text, 6.9:1 on panel */
+    --bs-heading-color: #22d3ee;              /* cyan headings like before */
+    --bs-border-color: #322a52;
+    --bs-tertiary-bg: #1c1930;                /* .bg-body-tertiary = panel */
+    --bs-tertiary-bg-rgb: 28, 25, 48;
+    --bs-dark-rgb: 28, 25, 48;                /* .bg-dark = panel colour */
+    --bs-primary: #7c3aed;
+    --bs-primary-rgb: 124, 58, 237;           /* .border-primary = neon purple */
+    --bs-info: #22d3ee;
+    --bs-info-rgb: 34, 211, 238;              /* .text-info / .border-info = cyan */
+    --bs-link-color: #22d3ee;
+    --bs-link-color-rgb: 34, 211, 238;
+    --bs-link-hover-color: #a78bfa;           /* lighter purple = readable on dark */
+    --bs-link-hover-color-rgb: 167, 139, 250;
+}
+
+/* ---------- Navbar link states ---------- */
+.navbar .nav-link {
+    color: #e8e6f0;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link:focus-visible,
+.navbar .nav-link.active {
+    background-color: #7c3aed;
+    color: #ffffff;
+}
+
+/* ---------- Buttons: Bootstrap button variables re-coloured ---------- */
+.btn-primary {
+    --bs-btn-color: #ffffff;
+    --bs-btn-bg: #7c3aed;
+    --bs-btn-border-color: #7c3aed;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #6d28d9;
+    --bs-btn-hover-border-color: #6d28d9;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #5b21b6;
+    --bs-btn-active-border-color: #5b21b6;
+    --bs-btn-focus-shadow-rgb: 124, 58, 237;
+}
+
+.btn-outline-primary {
+    --bs-btn-color: #c4b5fd;
+    --bs-btn-border-color: #7c3aed;
+    --bs-btn-hover-color: #ffffff;
+    --bs-btn-hover-bg: #7c3aed;
+    --bs-btn-hover-border-color: #7c3aed;
+    --bs-btn-active-color: #ffffff;
+    --bs-btn-active-bg: #6d28d9;
+    --bs-btn-active-border-color: #6d28d9;
+    --bs-btn-focus-shadow-rgb: 124, 58, 237;
+}
+
+.btn-outline-info {
+    --bs-btn-color: #22d3ee;
+    --bs-btn-border-color: #22d3ee;
+    --bs-btn-hover-color: #12101c;
+    --bs-btn-hover-bg: #22d3ee;
+    --bs-btn-hover-border-color: #22d3ee;
+    --bs-btn-active-color: #12101c;
+    --bs-btn-active-bg: #22d3ee;
+    --bs-btn-active-border-color: #22d3ee;
+}
+
+/* ---------- Cards ---------- */
+.card {
+    --bs-card-bg: #1c1930;
+    --bs-card-border-color: #322a52;
+}
+
+.nb-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.nb-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(124, 58, 237, 0.35);
+    border-color: #7c3aed;
+}
+
+.nb-card-img {
+    height: 180px;
+    object-fit: cover;
+}
+
+/* Circular profile image (border-radius: 50% via .rounded-circle) */
+.nb-profile-img {
+    width: 140px;
+    height: 140px;
+    object-fit: cover;
+}
+
+.nb-banner {
+    height: 220px;
+    object-fit: cover;
+}
+
+.nb-highlight {
+    --bs-card-bg: rgba(124, 58, 237, 0.12);
+}
+
+/* Sidebar list with cyan accent (like Assignment 2) */
+.nb-list-item {
+    background-color: #12101c;
+    border-left: 3px solid #22d3ee;
+}
+
+/* ---------- Table ---------- */
+.nb-table {
+    --bs-table-bg: #1c1930;
+    --bs-table-color: #e8e6f0;
+    --bs-table-border-color: #322a52;
+    --bs-table-striped-bg: #241f3d;
+    --bs-table-striped-color: #e8e6f0;
+    --bs-table-hover-bg: #2e2650;
+    --bs-table-hover-color: #ffffff;
+}
+
+.nb-table thead th {
+    --bs-table-bg: #7c3aed;
+    --bs-table-color: #ffffff;
+}
+
+/* ---------- Forms ---------- */
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+    border-color: #22d3ee;
+    box-shadow: 0 0 0 0.25rem rgba(34, 211, 238, 0.25);
+}
+
+.form-check-input:checked {
+    background-color: #7c3aed;
+    border-color: #7c3aed;
+}
+
+/* ---------- Carousel ---------- */
+.carousel-item img {
+    aspect-ratio: 640 / 420;
+    object-fit: cover;
+}
+
+/* Bootstrap's dark mode turns carousel arrows/indicators black;
+   keep them white so they stay visible on our images */
+:root[data-bs-theme="dark"] .carousel .carousel-control-prev-icon,
+:root[data-bs-theme="dark"] .carousel .carousel-control-next-icon {
+    filter: none;
+}
+
+:root[data-bs-theme="dark"] .carousel .carousel-indicators [data-bs-target] {
+    background-color: #ffffff;
+}
