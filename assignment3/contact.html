@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
-  <!-- Assignment #3: Media Queries + Bootstrap Grid | Team: Bogdan | Group: SE-2511 | Page by: Bogdan Tkachuk -->
+  <!-- Assignment #4: Introduction to JavaScript | Team: NeonByte | Group: SE-2511 | Page by: Bogdan Tkachuk -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NeonByte Gaming - Join / Contact</title>
@@ -12,21 +12,36 @@
 
 <a class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2" href="#main">Skip to main content</a>
 
-<!-- Task 5: Bootstrap navbar (collapses into a hamburger below lg) -->
+<!-- Task 5: Live Date & Time + Task 3/4 buttons in Navbar -->
 <nav class="navbar navbar-expand-lg bg-dark border-bottom border-2 border-primary sticky-top py-3" aria-label="Main navigation">
   <div class="container">
-    <a class="navbar-brand fw-bold fs-4" href="index.html">Neon<span class="text-info">Byte</span></a>
+    <a class="navbar-brand fw-bold fs-4" href="index.html">Gaming<span class="text-info">Club</span></a>
+
+    <!-- Task 5: Живые дата и время -->
+    <span id="current-date-time" class="badge bg-tertiary border border-secondary text-info ms-2 d-none d-md-inline-block"></span>
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
             aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav ms-auto gap-lg-2 mt-3 mt-lg-0 fw-semibold">
+      <ul class="navbar-nav ms-auto gap-lg-2 mt-3 mt-lg-0 fw-semibold align-items-center">
         <li class="nav-item"><a class="nav-link rounded px-3" href="index.html">Home</a></li>
         <li class="nav-item"><a class="nav-link rounded px-3" href="about.html">About Us</a></li>
         <li class="nav-item"><a class="nav-link rounded px-3" href="games.html">Games</a></li>
         <li class="nav-item"><a class="nav-link active rounded px-3" aria-current="page" href="contact.html">Join / Contact</a></li>
         <li class="nav-item"><a class="nav-link rounded px-3" href="media-queries.html">Media Queries</a></li>
+
+        <!-- Task 3: Кнопка открытия Попапа -->
+        <li class="nav-item ms-lg-2">
+          <button id="open-popup-btn" class="btn btn-outline-info btn-sm">Newsletter</button>
+        </li>
+
+        <!-- Task 4: Кнопка смены цвета фона -->
+        <li class="nav-item">
+          <button id="change-bg-btn" class="btn btn-primary btn-sm" title="Change Background Color">🎨 BG</button>
+        </li>
       </ul>
     </div>
   </div>
@@ -43,69 +58,59 @@
   </div>
 
   <div class="row g-4">
-    <!-- Task 9: responsive form built only with Bootstrap form classes -->
+    <!-- Task 1: JS Validated Form -->
     <section class="col-12 col-lg-8" aria-labelledby="form-title">
       <div class="bg-body-tertiary border rounded-3 p-3 p-md-4">
         <h2 id="form-title" class="h3 mb-4">Registration Form</h2>
-        <form id="contact-form" action="#" method="get" class="row g-3">
-          <div class="col-12 col-md-6">
-            <label for="name" class="form-label fw-semibold">Full Name / Gamer Tag</label>
+
+        <form id="js-validated-form" class="row g-3" novalidate>
+          <div class="col-12 col-md-6 form-group-val">
+            <label for="val-name" class="form-label fw-semibold">Gamer Tag / Full Name *</label>
             <div class="input-group">
-              <span class="input-group-text" id="name-addon">#</span>
-              <input type="text" class="form-control" id="name" name="name"
-                     placeholder="Enter your name or gamer tag" aria-describedby="name-addon" required>
+              <span class="input-group-text">#</span>
+              <input type="text" class="form-control" id="val-name" placeholder="e.g. ShadowRider">
             </div>
+            <div class="error-text"></div>
           </div>
-          <div class="col-12 col-md-6">
-            <label for="email" class="form-label fw-semibold">Email Address</label>
+
+          <div class="col-12 col-md-6 form-group-val">
+            <label for="val-email" class="form-label fw-semibold">Email Address *</label>
             <div class="input-group">
-              <span class="input-group-text" id="email-addon">@</span>
-              <input type="email" class="form-control" id="email" name="email"
-                     placeholder="you@example.com" aria-describedby="email-addon" required>
+              <span class="input-group-text">@</span>
+              <input type="email" class="form-control" id="val-email" placeholder="you@example.com">
             </div>
+            <div class="error-text"></div>
           </div>
-          <div class="col-12 col-md-8">
-            <label for="game" class="form-label fw-semibold">Main Game Category</label>
-            <select id="game" name="game" class="form-select">
-              <option value="shooter">Tactical Shooter</option>
-              <option value="moba">MOBA</option>
-              <option value="racing">Racing &amp; Sports Sim</option>
-              <option value="rpg">RPG &amp; Co-op</option>
-            </select>
+
+          <div class="col-12 col-md-6 form-group-val">
+            <label for="val-password" class="form-label fw-semibold">Password * (Min 8 chars)</label>
+            <input type="password" class="form-control" id="val-password" placeholder="••••••••">
+            <div class="error-text"></div>
           </div>
-          <div class="col-12 col-md-4">
-            <label for="teamcolor" class="form-label fw-semibold">Pick Your Squad Color</label>
-            <input type="color" class="form-control form-control-color w-100" id="teamcolor" name="teamcolor"
-                   value="#7c3aed" title="Choose your squad color">
+
+          <div class="col-12 col-md-6 form-group-val">
+            <label for="val-confirm-password" class="form-label fw-semibold">Confirm Password *</label>
+            <input type="password" class="form-control" id="val-confirm-password" placeholder="••••••••">
+            <div class="error-text"></div>
           </div>
-          <fieldset class="col-12">
-            <legend class="col-form-label fw-semibold pt-0">Preferred Play Style</legend>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="competitive" name="play-style" value="competitive" checked>
-              <label class="form-check-label" for="competitive">Competitive / Ranked</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" id="casual" name="play-style" value="casual">
-              <label class="form-check-label" for="casual">Casual / Fun</label>
-            </div>
-          </fieldset>
-          <div class="col-12">
-            <label for="message" class="form-label fw-semibold">Message</label>
-            <textarea class="form-control" id="message" name="message" rows="5"
-                      placeholder="Tell us your rank, availability, or anything else..."></textarea>
-          </div>
-          <div class="col-12">
+
+          <div class="col-12 form-group-val">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="rules" name="rules" required>
-              <label class="form-check-label" for="rules">I agree to the club's fair-play rules</label>
+              <input class="form-check-input" type="checkbox" id="val-rules">
+              <label class="form-check-label" for="val-rules">I agree to fair-play club rules</label>
             </div>
+            <div class="error-text"></div>
           </div>
+
           <div class="col-12">
-            <!-- Task 6: related form buttons grouped with btn-group -->
             <div class="btn-group" role="group" aria-label="Form actions">
-              <button type="submit" class="btn btn-primary btn-lg">Send Registration</button>
+              <button type="submit" class="btn btn-primary btn-lg">Submit Registration</button>
               <button type="reset" class="btn btn-outline-light btn-lg">Clear</button>
             </div>
+          </div>
+
+          <div id="form-success-msg" class="alert alert-success d-none mt-3" role="alert">
+            Registration successful! Welcome to the squad.
           </div>
         </form>
       </div>
@@ -142,11 +147,27 @@
 
 <footer class="bg-dark border-top border-2 border-primary text-center py-4 px-3 mt-auto">
   <div class="container">
-    <p class="small text-body-secondary mb-1">&copy; 2026 NeonByte Gaming Club. Assignment #3 Project.</p>
+    <p class="small text-body-secondary mb-1">&copy; 2026 NeonByte Gaming Club. Assignment #4 Project.</p>
     <p class="small text-body-secondary mb-0">Team Members: Bekzat Kuatbekov &amp; Bogdan Tkachuk</p>
   </div>
 </footer>
 
+<!-- Task 3: Всплывающее модальное окно -->
+<div id="popup-modal" class="popup-overlay" aria-hidden="true">
+  <div class="popup-content">
+    <button id="close-popup-btn" class="popup-close-btn" aria-label="Close">&times;</button>
+    <h3 class="h4 text-info mb-3">Join Gaming Club Newsletter</h3>
+    <p class="small text-body-secondary mb-3">Subscribe to get weekly tournament brackets and gaming news straight to your inbox.</p>
+    <form onsubmit="event.preventDefault(); alert('Subscribed!'); document.getElementById('popup-modal').classList.remove('active');">
+      <div class="mb-3">
+        <input type="email" class="form-control" placeholder="Enter your email" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Subscribe Now</button>
+    </form>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/main.js"></script>
 </body>
 </html>
