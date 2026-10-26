@@ -13,7 +13,7 @@
 }
 
 .mq-title {
-    color: #22d3ee;
+    color: var(--nb-cyan);
 }
 
 /* Shows which breakpoint is active right now */
@@ -67,8 +67,8 @@
     flex: 0 0 100%;
     display: flex;
     flex-direction: column;
-    background-color: #1c1930;
-    border: 1px solid #322a52;
+    background-color: var(--nb-panel);
+    border: 1px solid var(--nb-border);
     border-radius: 10px;
     padding: 1.2rem;
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
@@ -104,8 +104,8 @@
 }
 
 .mq-card-link:hover {
-    background-color: #22d3ee;
-    color: #12101c;
+    background-color: var(--nb-cyan);
+    color: var(--nb-bg);
 }
 
 /* Tablet: two cards in a row */

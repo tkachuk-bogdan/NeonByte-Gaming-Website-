@@ -1,0 +1,42 @@
+[
+  {
+    "id": 5,
+    "title": "Headshot Hour",
+    "category": "shooter",
+    "format": "2v2 Wingman Ladder",
+    "prize": 15000,
+    "date": "2026-12-05",
+    "slots": 32,
+    "registered": 18
+  },
+  {
+    "id": 6,
+    "title": "Drift King Sprint",
+    "category": "racing",
+    "format": "Best Lap Challenge",
+    "prize": 25000,
+    "date": "2026-12-12",
+    "slots": 20,
+    "registered": 20
+  },
+  {
+    "id": 7,
+    "title": "Ancient Siege",
+    "category": "moba",
+    "format": "5v5 Round Robin + Final",
+    "prize": 55000,
+    "date": "2026-12-19",
+    "slots": 12,
+    "registered": 7
+  },
+  {
+    "id": 8,
+    "title": "Dungeon Speedrun",
+    "category": "rpg",
+    "format": "4-player Co-op Race",
+    "prize": 10000,
+    "date": "2026-12-26",
+    "slots": 16,
+    "registered": 3
+  }
+]

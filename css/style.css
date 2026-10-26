@@ -1,39 +1,94 @@
 /* =========================================================
-   NeonByte Gaming - Assignment #3 (Bootstrap 5 version)
-   This file ONLY re-colours Bootstrap to keep our neon palette.
-   All layout comes from the Bootstrap grid, and ALL margins /
-   paddings come from Bootstrap spacing utilities (m-*, p-*).
+   NeonByte Gaming - shared stylesheet (Bootstrap 5 theme)
+   Assignments 3-5. Layout comes from the Bootstrap grid and
+   spacing from Bootstrap utilities (m-*, p-*). This file sets
+   colours, component styles and JS-driven effects.
 
-   Palette (same as Assignment 1-2):
-   - Background (deep space):  #12101c
-   - Panel background:         #1c1930
-   - Border:                   #322a52
-   - Primary accent (neon):    #7c3aed
-   - Secondary accent (cyan):  #22d3ee
-   - Text (light):             #e8e6f0
+   Assignment 5: all colours are CSS variables (--nb-*), so the
+   Day / Night switch only has to change data-bs-theme on <html>.
+   The navbar and footer keep data-bs-theme="dark" in both modes.
    ========================================================= */
 
+/* ---------- Theme palettes ---------- */
+/* Night theme (default) */
+:root,
+[data-bs-theme="dark"] {
+    --nb-bg: #12101c;
+    --nb-bg-rgb: 18, 16, 28;
+    --nb-panel: #1c1930;
+    --nb-panel-rgb: 28, 25, 48;
+    --nb-border: #322a52;
+    --nb-text: #e8e6f0;
+    --nb-text-rgb: 232, 230, 240;
+    --nb-muted: #a8a3bd;                      /* 6.9:1 on panel */
+    --nb-heading: #22d3ee;
+    --nb-cyan: #22d3ee;
+    --nb-cyan-rgb: 34, 211, 238;
+    --nb-purple: #7c3aed;
+    --nb-purple-soft: #c4b5fd;
+    --nb-link-hover: #a78bfa;
+    --nb-link-hover-rgb: 167, 139, 250;
+    --nb-stripe: #241f3d;
+    --nb-row-hover: #2e2650;
+    --nb-overlay: rgba(18, 16, 28, 0.85);
+    --nb-star-off: #4b4470;
+    --nb-danger: #f87171;
+}
+
+/* Day theme */
+:root[data-bs-theme="light"] {
+    --nb-bg: #f4f2fb;
+    --nb-bg-rgb: 244, 242, 251;
+    --nb-panel: #ffffff;
+    --nb-panel-rgb: 255, 255, 255;
+    --nb-border: #d9d2f3;
+    --nb-text: #1e1b2e;
+    --nb-text-rgb: 30, 27, 46;
+    --nb-muted: #57526b;                      /* 7:1 on white */
+    --nb-heading: #5b21b6;
+    --nb-cyan: #0e7490;                       /* darker cyan for contrast on light */
+    --nb-cyan-rgb: 14, 116, 144;
+    --nb-purple: #7c3aed;
+    --nb-purple-soft: #6d28d9;
+    --nb-link-hover: #5b21b6;
+    --nb-link-hover-rgb: 91, 33, 182;
+    --nb-stripe: #f1edfc;
+    --nb-row-hover: #e9e3fb;
+    --nb-overlay: rgba(30, 27, 46, 0.6);
+    --nb-star-off: #cfc8e6;
+    --nb-danger: #b91c1c;
+}
+
 /* ---------- Bootstrap CSS variables -> our palette ---------- */
-:root[data-bs-theme="dark"] {
+:root[data-bs-theme],
+[data-bs-theme] {
     --bs-body-font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
-    --bs-body-bg: #12101c;
-    --bs-body-bg-rgb: 18, 16, 28;
-    --bs-body-color: #e8e6f0;
-    --bs-body-color-rgb: 232, 230, 240;
-    --bs-secondary-color: #a8a3bd;           /* muted text, 6.9:1 on panel */
-    --bs-heading-color: #22d3ee;              /* cyan headings like before */
-    --bs-border-color: #322a52;
-    --bs-tertiary-bg: #1c1930;                /* .bg-body-tertiary = panel */
-    --bs-tertiary-bg-rgb: 28, 25, 48;
-    --bs-dark-rgb: 28, 25, 48;                /* .bg-dark = panel colour */
+    --bs-body-bg: var(--nb-bg);
+    --bs-body-bg-rgb: var(--nb-bg-rgb);
+    --bs-body-color: var(--nb-text);
+    --bs-body-color-rgb: var(--nb-text-rgb);
+    --bs-secondary-color: var(--nb-muted);
+    --bs-heading-color: var(--nb-heading);
+    --bs-border-color: var(--nb-border);
+    --bs-tertiary-bg: var(--nb-panel);         /* .bg-body-tertiary = panel */
+    --bs-tertiary-bg-rgb: var(--nb-panel-rgb);
+    --bs-dark-rgb: 28, 25, 48;                  /* .bg-dark = navbar / footer */
     --bs-primary: #7c3aed;
-    --bs-primary-rgb: 124, 58, 237;           /* .border-primary = neon purple */
-    --bs-info: #22d3ee;
-    --bs-info-rgb: 34, 211, 238;              /* .text-info / .border-info = cyan */
-    --bs-link-color: #22d3ee;
-    --bs-link-color-rgb: 34, 211, 238;
-    --bs-link-hover-color: #a78bfa;           /* lighter purple = readable on dark */
-    --bs-link-hover-color-rgb: 167, 139, 250;
+    --bs-primary-rgb: 124, 58, 237;             /* .border-primary = neon purple */
+    --bs-info: var(--nb-cyan);
+    --bs-info-rgb: var(--nb-cyan-rgb);          /* .text-info / .border-info */
+    --bs-link-color: var(--nb-cyan);
+    --bs-link-color-rgb: var(--nb-cyan-rgb);
+    --bs-link-hover-color: var(--nb-link-hover);
+    --bs-link-hover-color-rgb: var(--nb-link-hover-rgb);
+}
+
+/* Smooth colour change when the theme is switched */
+body,
+.card,
+.bg-body-tertiary,
+.custom-accordion-item {
+    transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
 /* ---------- Navbar link states ---------- */
@@ -60,11 +115,14 @@
     --bs-btn-active-color: #ffffff;
     --bs-btn-active-bg: #5b21b6;
     --bs-btn-active-border-color: #5b21b6;
+    --bs-btn-disabled-color: #ffffff;
+    --bs-btn-disabled-bg: #7c3aed;
+    --bs-btn-disabled-border-color: #7c3aed;
     --bs-btn-focus-shadow-rgb: 124, 58, 237;
 }
 
 .btn-outline-primary {
-    --bs-btn-color: #c4b5fd;
+    --bs-btn-color: var(--nb-purple-soft);
     --bs-btn-border-color: #7c3aed;
     --bs-btn-hover-color: #ffffff;
     --bs-btn-hover-bg: #7c3aed;
@@ -76,20 +134,34 @@
 }
 
 .btn-outline-info {
-    --bs-btn-color: #22d3ee;
-    --bs-btn-border-color: #22d3ee;
-    --bs-btn-hover-color: #12101c;
-    --bs-btn-hover-bg: #22d3ee;
-    --bs-btn-hover-border-color: #22d3ee;
-    --bs-btn-active-color: #12101c;
-    --bs-btn-active-bg: #22d3ee;
-    --bs-btn-active-border-color: #22d3ee;
+    --bs-btn-color: var(--nb-cyan);
+    --bs-btn-border-color: var(--nb-cyan);
+    --bs-btn-hover-color: var(--nb-bg);
+    --bs-btn-hover-bg: var(--nb-cyan);
+    --bs-btn-hover-border-color: var(--nb-cyan);
+    --bs-btn-active-color: var(--nb-bg);
+    --bs-btn-active-bg: var(--nb-cyan);
+    --bs-btn-active-border-color: var(--nb-cyan);
+}
+
+/* "Light" outline buttons are white; in the Day theme they need dark text */
+:root[data-bs-theme="light"] .btn-outline-light {
+    --bs-btn-color: var(--nb-text);
+    --bs-btn-border-color: var(--nb-border);
+    --bs-btn-hover-color: var(--nb-text);
+    --bs-btn-hover-bg: var(--nb-stripe);
+    --bs-btn-hover-border-color: var(--nb-border);
+    --bs-btn-active-color: var(--nb-text);
+    --bs-btn-active-bg: var(--nb-row-hover);
+    --bs-btn-active-border-color: var(--nb-border);
+    --bs-btn-disabled-color: var(--nb-muted);
+    --bs-btn-disabled-border-color: var(--nb-border);
 }
 
 /* ---------- Cards ---------- */
 .card {
-    --bs-card-bg: #1c1930;
-    --bs-card-border-color: #322a52;
+    --bs-card-bg: var(--nb-panel);
+    --bs-card-border-color: var(--nb-border);
 }
 
 .nb-card {
@@ -125,19 +197,19 @@
 
 /* Sidebar list with cyan accent (like Assignment 2) */
 .nb-list-item {
-    background-color: #12101c;
-    border-left: 3px solid #22d3ee;
+    background-color: var(--nb-bg);
+    border-left: 3px solid var(--nb-cyan);
 }
 
 /* ---------- Table ---------- */
 .nb-table {
-    --bs-table-bg: #1c1930;
-    --bs-table-color: #e8e6f0;
-    --bs-table-border-color: #322a52;
-    --bs-table-striped-bg: #241f3d;
-    --bs-table-striped-color: #e8e6f0;
-    --bs-table-hover-bg: #2e2650;
-    --bs-table-hover-color: #ffffff;
+    --bs-table-bg: var(--nb-panel);
+    --bs-table-color: var(--nb-text);
+    --bs-table-border-color: var(--nb-border);
+    --bs-table-striped-bg: var(--nb-stripe);
+    --bs-table-striped-color: var(--nb-text);
+    --bs-table-hover-bg: var(--nb-row-hover);
+    --bs-table-hover-color: var(--nb-text);
 }
 
 .nb-table thead th {
@@ -149,8 +221,8 @@
 .form-control:focus,
 .form-select:focus,
 .form-check-input:focus {
-    border-color: #22d3ee;
-    box-shadow: 0 0 0 0.25rem rgba(34, 211, 238, 0.25);
+    border-color: var(--nb-cyan);
+    box-shadow: 0 0 0 0.25rem rgba(var(--nb-cyan-rgb), 0.25);
 }
 
 .form-check-input:checked {
@@ -175,13 +247,15 @@
     background-color: #ffffff;
 }
 
-/* ---------- JS Features Custom CSS ---------- */
+/* =========================================================
+   Assignment 4: JS features
+   ========================================================= */
 
 /* Task 2: Custom Accordion */
 .custom-accordion-item {
-    border: 1px solid #322a52;
+    border: 1px solid var(--nb-border);
     border-radius: 8px;
-    background-color: #1c1930;
+    background-color: var(--nb-panel);
     overflow: hidden;
     margin-bottom: 1rem;
 }
@@ -191,7 +265,7 @@
     padding: 1.2rem;
     background: none;
     border: none;
-    color: #22d3ee;
+    color: var(--nb-cyan);
     font-weight: 600;
     font-size: 1.1rem;
     text-align: left;
@@ -223,7 +297,7 @@
     overflow: hidden;
     transition: max-height 0.4s ease-out;
     padding: 0 1.2rem;
-    color: #e8e6f0;
+    color: var(--nb-text);
 }
 
 .custom-accordion-item.active .custom-accordion-body {
@@ -237,7 +311,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(18, 16, 28, 0.85);
+    background: var(--nb-overlay);
     backdrop-filter: blur(5px);
     display: flex;
     align-items: center;
@@ -254,7 +328,7 @@
 }
 
 .popup-content {
-    background-color: #1c1930;
+    background-color: var(--nb-panel);
     border: 2px solid #7c3aed;
     border-radius: 12px;
     padding: 2rem;
@@ -276,7 +350,7 @@
     right: 15px;
     background: none;
     border: none;
-    color: #22d3ee;
+    color: var(--nb-cyan);
     font-size: 1.8rem;
     cursor: pointer;
     line-height: 1;
@@ -284,7 +358,7 @@
 
 /* Task 1: Validation Styles */
 .error-text {
-    color: #ef4444;
+    color: var(--nb-danger);
     font-size: 0.85rem;
     margin-top: 0.25rem;
     min-height: 1.2rem;
@@ -296,4 +370,153 @@
 
 .is-valid {
     border-color: #10b981 !important;
+}
+
+/* =========================================================
+   Assignment 5: Advanced JavaScript & DOM
+   ========================================================= */
+
+/* Navbar links never wrap onto two lines */
+.navbar .nav-link,
+.navbar .btn {
+    white-space: nowrap;
+}
+
+/* ---------- Theme + sound dock (bottom-right corner) ---------- */
+.nb-dock {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 1500;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.nb-dock-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--nb-purple);
+    background-color: var(--nb-panel);
+    color: var(--nb-text);
+    font-size: 1.3rem;
+    line-height: 1;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.35);
+    cursor: pointer;
+    transition: transform 0.5s ease, background-color 0.3s ease;
+}
+
+@media (max-width: 575.98px) {
+    .nb-dock-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+}
+
+.nb-dock-btn:hover,
+.nb-dock-btn:focus-visible {
+    background-color: var(--nb-purple);
+    color: #ffffff;
+}
+
+/* ---------- Greeting by time of day (index) ---------- */
+.nb-greeting {
+    display: inline-block;
+    border: 1px solid var(--nb-border);
+    border-radius: 999px;
+    background-color: rgba(124, 58, 237, 0.12);
+    color: var(--nb-text);
+    font-weight: 600;
+}
+
+/* ---------- Rating stars (games) ---------- */
+.nb-stars {
+    display: flex;
+    gap: 0.15rem;
+}
+
+.nb-star {
+    background: none;
+    border: none;
+    padding: 0 0.1rem;
+    font-size: 1.75rem;
+    line-height: 1;
+    color: var(--nb-star-off);
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.nb-star.is-on {
+    color: #fbbf24;
+    text-shadow: 0 0 10px rgba(251, 191, 36, 0.6);
+}
+
+.nb-star:focus-visible {
+    outline: 2px solid var(--nb-cyan);
+    border-radius: 6px;
+}
+
+/* ---------- Tournament explorer cards (games) ---------- */
+.nb-tour-card .progress {
+    height: 8px;
+    background-color: var(--nb-stripe);
+}
+
+.nb-tour-card .progress-bar {
+    background-color: var(--nb-purple);
+    transition: width 0.6s ease;
+}
+
+.nb-tour-card.is-full .progress-bar {
+    background-color: var(--nb-muted);
+}
+
+.nb-prize {
+    color: var(--nb-cyan);
+    font-weight: 700;
+}
+
+/* ---------- Animations (classes are added by JavaScript) ---------- */
+@keyframes nb-enter {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes nb-pop {
+    0%   { transform: scale(1); }
+    50%  { transform: scale(1.45) rotate(-12deg); }
+    100% { transform: scale(1); }
+}
+
+@keyframes nb-shake {
+    0%, 100% { transform: translateX(0); }
+    20%, 60% { transform: translateX(-8px); }
+    40%, 80% { transform: translateX(8px); }
+}
+
+.nb-enter {
+    animation: nb-enter 0.45s ease both;
+}
+
+.nb-pop {
+    animation: nb-pop 0.4s ease;
+}
+
+.nb-shake {
+    animation: nb-shake 0.4s ease;
+}
+
+/* Respect users who turned animations off in their OS */
+@media (prefers-reduced-motion: reduce) {
+    .nb-enter,
+    .nb-pop,
+    .nb-shake {
+        animation: none;
+    }
+
+    .nb-dock-btn {
+        transition: none;
+    }
 }

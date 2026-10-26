@@ -1,24 +1,25 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
-  <!-- Assignment #4: Introduction to JavaScript | Team: NeonByte | Group: SE-2511 | Page by: Bogdan Tkachuk -->
+  <!-- Assignment #5: Advanced JavaScript & DOM | Team: NeonByte | Group: SE-2511 | Page by: Bogdan Tkachuk -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NeonByte Gaming - Join / Contact</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
 </head>
 <body class="d-flex flex-column min-vh-100">
 
 <a class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2" href="#main">Skip to main content</a>
 
 <!-- Task 5: Live Date & Time + Task 3/4 buttons in Navbar -->
-<nav class="navbar navbar-expand-lg bg-dark border-bottom border-2 border-primary sticky-top py-3" aria-label="Main navigation">
+<nav data-bs-theme="dark" class="navbar navbar-expand-lg bg-dark border-bottom border-2 border-primary sticky-top py-3" aria-label="Main navigation">
   <div class="container">
     <a class="navbar-brand fw-bold fs-4" href="index.html">Gaming<span class="text-info">Club</span></a>
 
-    <!-- Task 5: Живые дата и время -->
-    <span id="current-date-time" class="badge bg-tertiary border border-secondary text-info ms-2 d-none d-md-inline-block"></span>
+    <!-- A4 Task 5: live date & time (shown on wide screens) -->
+    <span id="current-date-time" class="badge bg-body-tertiary border border-secondary text-info ms-2 d-none d-xl-inline-block"></span>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
             aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,18 +28,18 @@
 
     <div class="collapse navbar-collapse" id="mainNav">
       <ul class="navbar-nav ms-auto gap-lg-2 mt-3 mt-lg-0 fw-semibold align-items-center">
-        <li class="nav-item"><a class="nav-link rounded px-3" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link rounded px-3" href="about.html">About Us</a></li>
-        <li class="nav-item"><a class="nav-link rounded px-3" href="games.html">Games</a></li>
-        <li class="nav-item"><a class="nav-link active rounded px-3" aria-current="page" href="contact.html">Join / Contact</a></li>
-        <li class="nav-item"><a class="nav-link rounded px-3" href="media-queries.html">Media Queries</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="games.html">Games</a></li>
+        <li class="nav-item"><a class="nav-link active rounded px-3 px-lg-2 px-xxl-3" aria-current="page" href="contact.html">Join / Contact</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="media-queries.html">Media Queries</a></li>
 
-        <!-- Task 3: Кнопка открытия Попапа -->
+        <!-- A4 Task 3: open the newsletter popup -->
         <li class="nav-item ms-lg-2">
           <button id="open-popup-btn" class="btn btn-outline-info btn-sm">Newsletter</button>
         </li>
 
-        <!-- Task 4: Кнопка смены цвета фона -->
+        <!-- A4 Task 4: change the background colour -->
         <li class="nav-item">
           <button id="change-bg-btn" class="btn btn-primary btn-sm" title="Change Background Color">🎨 BG</button>
         </li>
@@ -145,29 +146,38 @@
   </div>
 </main>
 
-<footer class="bg-dark border-top border-2 border-primary text-center py-4 px-3 mt-auto">
+<footer data-bs-theme="dark" class="bg-dark border-top border-2 border-primary text-center py-4 px-3 mt-auto">
   <div class="container">
-    <p class="small text-body-secondary mb-1">&copy; 2026 NeonByte Gaming Club. Assignment #4 Project.</p>
+    <p class="small text-body-secondary mb-1">&copy; 2026 NeonByte Gaming Club. Assignment #5 Project.</p>
     <p class="small text-body-secondary mb-0">Team Members: Bekzat Kuatbekov &amp; Bogdan Tkachuk</p>
   </div>
 </footer>
 
-<!-- Task 3: Всплывающее модальное окно -->
+<!-- Assignment 5: Day / Night theme + sound controls -->
+<div class="nb-dock" role="group" aria-label="Theme and sound settings">
+  <button type="button" id="theme-toggle" class="nb-dock-btn" aria-pressed="false" aria-label="Switch to day theme" title="Day / Night theme">🌙</button>
+  <button type="button" id="sound-toggle" class="nb-dock-btn" aria-pressed="true" aria-label="Turn sound off" title="Sound on / off">🔊</button>
+</div>
+
+<!-- A4 Task 3: newsletter popup (form is sent by js/app.js) -->
 <div id="popup-modal" class="popup-overlay" aria-hidden="true">
   <div class="popup-content">
     <button id="close-popup-btn" class="popup-close-btn" aria-label="Close">&times;</button>
     <h3 class="h4 text-info mb-3">Join Gaming Club Newsletter</h3>
     <p class="small text-body-secondary mb-3">Subscribe to get weekly tournament brackets and gaming news straight to your inbox.</p>
-    <form onsubmit="event.preventDefault(); alert('Subscribed!'); document.getElementById('popup-modal').classList.remove('active');">
+    <form id="newsletter-form" novalidate>
       <div class="mb-3">
-        <input type="email" class="form-control" placeholder="Enter your email" required>
+        <label for="newsletter-email" class="visually-hidden">Email address</label>
+        <input type="email" id="newsletter-email" class="form-control" placeholder="Enter your email" required>
       </div>
       <button type="submit" class="btn btn-primary w-100">Subscribe Now</button>
+      <p id="newsletter-message" class="small mt-3 mb-0" role="status" aria-live="polite"></p>
     </form>
   </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/app.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
