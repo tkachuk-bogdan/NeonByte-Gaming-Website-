@@ -206,15 +206,20 @@ document.addEventListener('DOMContentLoaded', () => {
       submitBtn.textContent = 'Sending...';
 
       // the password is checked here but never sent anywhere
-      const registration = { gamerTag: name.value.trim(), email: email.value.trim() };
+      const registration = {
+        gamerTag: name.value.trim(),
+        email: email.value.trim(),
+        game: document.getElementById('val-game').value,
+        playStyle: contactForm.querySelector('input[name="play-style"]:checked').value,
+        message: document.getElementById('val-message').value.trim()
+      };
 
       sendFormData(API_URL, registration,
         // success callback
         (result) => {
+          contactForm.reset(); // clears the fields (the reset handler below also removes the marks)
           showMessage(messageBox, 'success',
             `Registration #${result.id} received! Welcome to the squad, ${registration.gamerTag}.`);
-          contactForm.reset();
-          document.querySelectorAll('.is-valid').forEach(el => el.classList.remove('is-valid'));
           SoundFX.play('success');
           enableSubmit(submitBtn);
         },
@@ -225,6 +230,15 @@ document.addEventListener('DOMContentLoaded', () => {
           enableSubmit(submitBtn);
         }
       );
+    });
+  }
+
+  // "Clear" button (type="reset"): also remove the red / green marks and messages
+  if (contactForm) {
+    contactForm.addEventListener('reset', () => {
+      contactForm.querySelectorAll('.is-invalid, .is-valid').forEach(el => el.classList.remove('is-invalid', 'is-valid'));
+      contactForm.querySelectorAll('.error-text').forEach(el => { el.textContent = ''; });
+      document.getElementById('form-success-msg').classList.add('d-none');
     });
   }
 

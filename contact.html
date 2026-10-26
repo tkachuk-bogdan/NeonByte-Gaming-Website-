@@ -19,7 +19,7 @@
     <a class="navbar-brand fw-bold fs-4" href="index.html">Gaming<span class="text-info">Club</span></a>
 
     <!-- A4 Task 5: live date & time (shown on wide screens) -->
-    <span id="current-date-time" class="badge bg-body-tertiary border border-secondary text-info ms-2 d-none d-xl-inline-block"></span>
+    <span id="current-date-time" class="badge bg-body-tertiary border border-secondary text-info ms-2 d-none d-md-inline-block d-lg-none d-xl-inline-block"></span>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
             aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -93,6 +93,35 @@
             <label for="val-confirm-password" class="form-label fw-semibold">Confirm Password *</label>
             <input type="password" class="form-control" id="val-confirm-password" placeholder="••••••••">
             <div class="error-text"></div>
+          </div>
+
+          <!-- Fields from Assignments 1 & 3 (dropdown, radio buttons, textarea) - optional -->
+          <div class="col-12 col-md-6">
+            <label for="val-game" class="form-label fw-semibold">Main Game Category</label>
+            <select id="val-game" class="form-select">
+              <option value="shooter">Tactical Shooter</option>
+              <option value="moba">MOBA</option>
+              <option value="racing">Racing &amp; Sports Sim</option>
+              <option value="rpg">RPG &amp; Co-op</option>
+            </select>
+          </div>
+
+          <fieldset class="col-12 col-md-6">
+            <legend class="col-form-label fw-semibold pt-0">Preferred Play Style</legend>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="val-competitive" name="play-style" value="competitive" checked>
+              <label class="form-check-label" for="val-competitive">Competitive / Ranked</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" id="val-casual" name="play-style" value="casual">
+              <label class="form-check-label" for="val-casual">Casual / Fun</label>
+            </div>
+          </fieldset>
+
+          <div class="col-12">
+            <label for="val-message" class="form-label fw-semibold">Message</label>
+            <textarea id="val-message" class="form-control" rows="3"
+                      placeholder="Tell us your rank, availability, or anything else..."></textarea>
           </div>
 
           <div class="col-12 form-group-val">

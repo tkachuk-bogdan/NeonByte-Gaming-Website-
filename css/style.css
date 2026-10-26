@@ -434,13 +434,12 @@ body,
 /* ---------- Rating stars (games) ---------- */
 .nb-stars {
     display: flex;
-    gap: 0.15rem;
+    gap: 0.35rem;
 }
 
 .nb-star {
     background: none;
     border: none;
-    padding: 0 0.1rem;
     font-size: 1.75rem;
     line-height: 1;
     color: var(--nb-star-off);
