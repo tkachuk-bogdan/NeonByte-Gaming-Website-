@@ -255,6 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
           newsletterMessage.textContent = `Subscribed! Weekly brackets will be sent to ${email}.`;
           newsletterMessage.className = 'small mt-3 mb-0 text-success';
           newsletterForm.reset();
+          showToast('Successfully subscribed to the newsletter!');
           SoundFX.play('success');
           setTimeout(() => {
             document.getElementById('close-popup-btn').click();
@@ -490,6 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (tournament && tournament.join()) {
         renderTournaments();
         loadStatus.textContent = `Your squad joined ${tournament.title}! ${tournament.getFreeSlots()} slots left.`;
+        showToast(`Joined ${tournament.title}!`);
         SoundFX.play('success');
       }
     });

@@ -202,8 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       // Everything is valid: send it without reloading the page
       const submitBtn = contactForm.querySelector('button[type="submit"]');
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
+      showButtonSpinner(submitBtn);
 
       // the password is checked here but never sent anywhere
       const registration = {
@@ -214,22 +213,27 @@ document.addEventListener('DOMContentLoaded', () => {
         message: document.getElementById('val-message').value.trim()
       };
 
-      sendFormData(API_URL, registration,
-        // success callback
-        (result) => {
-          contactForm.reset(); // clears the fields (the reset handler below also removes the marks)
-          showMessage(messageBox, 'success',
-            `Registration #${result.id} received! Welcome to the squad, ${registration.gamerTag}.`);
-          SoundFX.play('success');
-          enableSubmit(submitBtn);
-        },
-        // error callback
-        () => {
-          showMessage(messageBox, 'danger', 'Could not send your registration. Check your connection and try again.');
-          SoundFX.play('error');
-          enableSubmit(submitBtn);
-        }
-      );
+      // a6: short delay simulates a server call
+      setTimeout(() => {
+        sendFormData(API_URL, registration,
+          // success callback
+          (result) => {
+            contactForm.reset(); // clears the fields (the reset handler below also removes the marks)
+            showMessage(messageBox, 'success',
+              `Registration #${result.id} received! Welcome to the squad, ${registration.gamerTag}.`);
+            showToast('Form submitted successfully!');
+            SoundFX.play('success');
+            enableSubmit(submitBtn);
+          },
+          // error callback
+          () => {
+            showMessage(messageBox, 'danger', 'Could not send your registration. Check your connection and try again.');
+            showToast('Registration was not sent.', 'error');
+            SoundFX.play('error');
+            enableSubmit(submitBtn);
+          }
+        );
+      }, 1500);
     });
   }
 
@@ -266,8 +270,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function enableSubmit(button) {
-    button.disabled = false;
-    button.textContent = 'Submit Registration';
+    hideButtonSpinner(button);
   }
 
 });
