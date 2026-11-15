@@ -1,16 +1,5 @@
-/* =========================================================
-   NeonByte Gaming - shared stylesheet (Bootstrap 5 theme)
-   Assignments 3-5. Layout comes from the Bootstrap grid and
-   spacing from Bootstrap utilities (m-*, p-*). This file sets
-   colours, component styles and JS-driven effects.
-
-   Assignment 5: all colours are CSS variables (--nb-*), so the
-   Day / Night switch only has to change data-bs-theme on <html>.
-   The navbar and footer keep data-bs-theme="dark" in both modes.
-   ========================================================= */
-
-/* ---------- Theme palettes ---------- */
-/* Night theme (default) */
+/* theme palettes */
+/* night theme (default) */
 :root,
 [data-bs-theme="dark"] {
     --nb-bg: #12101c;
@@ -20,7 +9,7 @@
     --nb-border: #322a52;
     --nb-text: #e8e6f0;
     --nb-text-rgb: 232, 230, 240;
-    --nb-muted: #a8a3bd;                      /* 6.9:1 on panel */
+    --nb-muted: #a8a3bd;
     --nb-heading: #22d3ee;
     --nb-cyan: #22d3ee;
     --nb-cyan-rgb: 34, 211, 238;
@@ -35,7 +24,7 @@
     --nb-danger: #f87171;
 }
 
-/* Day theme */
+/* day theme */
 :root[data-bs-theme="light"] {
     --nb-bg: #f4f2fb;
     --nb-bg-rgb: 244, 242, 251;
@@ -44,9 +33,9 @@
     --nb-border: #d9d2f3;
     --nb-text: #1e1b2e;
     --nb-text-rgb: 30, 27, 46;
-    --nb-muted: #57526b;                      /* 7:1 on white */
+    --nb-muted: #57526b;
     --nb-heading: #5b21b6;
-    --nb-cyan: #0e7490;                       /* darker cyan for contrast on light */
+    --nb-cyan: #0e7490;
     --nb-cyan-rgb: 14, 116, 144;
     --nb-purple: #7c3aed;
     --nb-purple-soft: #6d28d9;
@@ -59,7 +48,7 @@
     --nb-danger: #b91c1c;
 }
 
-/* ---------- Bootstrap CSS variables -> our palette ---------- */
+/* bootstrap css variables -> our palette */
 :root[data-bs-theme],
 [data-bs-theme] {
     --bs-body-font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
@@ -70,20 +59,20 @@
     --bs-secondary-color: var(--nb-muted);
     --bs-heading-color: var(--nb-heading);
     --bs-border-color: var(--nb-border);
-    --bs-tertiary-bg: var(--nb-panel);         /* .bg-body-tertiary = panel */
+    --bs-tertiary-bg: var(--nb-panel);
     --bs-tertiary-bg-rgb: var(--nb-panel-rgb);
-    --bs-dark-rgb: 28, 25, 48;                  /* .bg-dark = navbar / footer */
+    --bs-dark-rgb: 28, 25, 48;
     --bs-primary: #7c3aed;
-    --bs-primary-rgb: 124, 58, 237;             /* .border-primary = neon purple */
+    --bs-primary-rgb: 124, 58, 237;
     --bs-info: var(--nb-cyan);
-    --bs-info-rgb: var(--nb-cyan-rgb);          /* .text-info / .border-info */
+    --bs-info-rgb: var(--nb-cyan-rgb);
     --bs-link-color: var(--nb-cyan);
     --bs-link-color-rgb: var(--nb-cyan-rgb);
     --bs-link-hover-color: var(--nb-link-hover);
     --bs-link-hover-color-rgb: var(--nb-link-hover-rgb);
 }
 
-/* Smooth colour change when the theme is switched */
+/* smooth colour change when the theme is switched */
 body,
 .card,
 .bg-body-tertiary,
@@ -91,7 +80,7 @@ body,
     transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
 }
 
-/* ---------- Navbar link states ---------- */
+/* navbar link states */
 .navbar .nav-link {
     color: #e8e6f0;
     transition: background-color 0.2s ease, color 0.2s ease;
@@ -104,7 +93,7 @@ body,
     color: #ffffff;
 }
 
-/* ---------- Buttons: Bootstrap button variables re-coloured ---------- */
+/* buttons: bootstrap button variables re-coloured */
 .btn-primary {
     --bs-btn-color: #ffffff;
     --bs-btn-bg: #7c3aed;
@@ -144,7 +133,7 @@ body,
     --bs-btn-active-border-color: var(--nb-cyan);
 }
 
-/* "Light" outline buttons are white; in the Day theme they need dark text */
+/* "light" outline buttons are white; in the day theme they need dark text */
 :root[data-bs-theme="light"] .btn-outline-light {
     --bs-btn-color: var(--nb-text);
     --bs-btn-border-color: var(--nb-border);
@@ -158,7 +147,7 @@ body,
     --bs-btn-disabled-border-color: var(--nb-border);
 }
 
-/* ---------- Cards ---------- */
+/* cards */
 .card {
     --bs-card-bg: var(--nb-panel);
     --bs-card-border-color: var(--nb-border);
@@ -179,7 +168,7 @@ body,
     object-fit: cover;
 }
 
-/* Circular profile image (border-radius: 50% via .rounded-circle) */
+/* circular profile image (border-radius: 50% via .rounded-circle) */
 .nb-profile-img {
     width: 140px;
     height: 140px;
@@ -195,13 +184,13 @@ body,
     --bs-card-bg: rgba(124, 58, 237, 0.12);
 }
 
-/* Sidebar list with cyan accent (like Assignment 2) */
+/* sidebar list with cyan accent (like assignment 2) */
 .nb-list-item {
     background-color: var(--nb-bg);
     border-left: 3px solid var(--nb-cyan);
 }
 
-/* ---------- Table ---------- */
+/* table */
 .nb-table {
     --bs-table-bg: var(--nb-panel);
     --bs-table-color: var(--nb-text);
@@ -217,7 +206,7 @@ body,
     --bs-table-color: #ffffff;
 }
 
-/* ---------- Forms ---------- */
+/* forms */
 .form-control:focus,
 .form-select:focus,
 .form-check-input:focus {
@@ -230,14 +219,12 @@ body,
     border-color: #7c3aed;
 }
 
-/* ---------- Carousel ---------- */
+/* carousel */
 .carousel-item img {
     aspect-ratio: 640 / 420;
     object-fit: cover;
 }
 
-/* Bootstrap's dark mode turns carousel arrows/indicators black;
-   keep them white so they stay visible on our images */
 :root[data-bs-theme="dark"] .carousel .carousel-control-prev-icon,
 :root[data-bs-theme="dark"] .carousel .carousel-control-next-icon {
     filter: none;
@@ -247,11 +234,7 @@ body,
     background-color: #ffffff;
 }
 
-/* =========================================================
-   Assignment 4: JS features
-   ========================================================= */
-
-/* Task 2: Custom Accordion */
+/* custom accordion */
 .custom-accordion-item {
     border: 1px solid var(--nb-border);
     border-radius: 8px;
@@ -304,7 +287,7 @@ body,
     padding: 0 1.2rem 1.2rem 1.2rem;
 }
 
-/* Task 3: Popup Modal */
+/* popup modal */
 .popup-overlay {
     position: fixed;
     top: 0;
@@ -356,7 +339,7 @@ body,
     line-height: 1;
 }
 
-/* Task 1: Validation Styles */
+/* validation styles */
 .error-text {
     color: var(--nb-danger);
     font-size: 0.85rem;
@@ -372,17 +355,13 @@ body,
     border-color: #10b981 !important;
 }
 
-/* =========================================================
-   Assignment 5: Advanced JavaScript & DOM
-   ========================================================= */
-
-/* Navbar links never wrap onto two lines */
+/* navbar links never wrap onto two lines */
 .navbar .nav-link,
 .navbar .btn {
     white-space: nowrap;
 }
 
-/* ---------- Theme + sound dock (bottom-right corner) ---------- */
+/* theme + sound dock (bottom-right corner) */
 .nb-dock {
     position: fixed;
     right: 1rem;
@@ -421,7 +400,7 @@ body,
     color: #ffffff;
 }
 
-/* ---------- Greeting by time of day (index) ---------- */
+/* greeting by time of day (index) */
 .nb-greeting {
     display: inline-block;
     border: 1px solid var(--nb-border);
@@ -431,7 +410,7 @@ body,
     font-weight: 600;
 }
 
-/* ---------- Rating stars (games) ---------- */
+/* rating stars (games) */
 .nb-stars {
     display: flex;
     gap: 0.35rem;
@@ -457,7 +436,7 @@ body,
     border-radius: 6px;
 }
 
-/* ---------- Tournament explorer cards (games) ---------- */
+/* tournament explorer cards (games) */
 .nb-tour-card .progress {
     height: 8px;
     background-color: var(--nb-stripe);
@@ -477,7 +456,7 @@ body,
     font-weight: 700;
 }
 
-/* ---------- Animations (classes are added by JavaScript) ---------- */
+/* animations (classes are added by javascript) */
 @keyframes nb-enter {
     from { opacity: 0; transform: translateY(16px); }
     to   { opacity: 1; transform: translateY(0); }
@@ -507,7 +486,7 @@ body,
     animation: nb-shake 0.4s ease;
 }
 
-/* Respect users who turned animations off in their OS */
+/* respect users who turned animations off in their os */
 @media (prefers-reduced-motion: reduce) {
     .nb-enter,
     .nb-pop,
@@ -519,11 +498,6 @@ body,
         transition: none;
     }
 }
-
-
-/* =========================================================
-   Assignment 6: jQuery
-   ========================================================= */
 
 .nb-progress {
     position: fixed;
@@ -731,5 +705,198 @@ img.lazy.is-loaded {
 
     img.lazy {
         transition: none;
+    }
+}
+
+/* animated buttons */
+.btn {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover:not(:disabled),
+.btn:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(124, 58, 237, 0.35);
+}
+
+.btn:active:not(:disabled) {
+    transform: translateY(0) scale(0.97);
+    box-shadow: none;
+}
+
+.btn-group > .btn:hover:not(:disabled) {
+    z-index: 2;
+}
+
+.nb-nav-icon {
+    transition: transform 0.4s ease;
+}
+
+#nav-account:hover .nb-nav-icon {
+    transform: rotate(360deg) scale(1.15);
+}
+
+/* account pages */
+.nb-auth-card .input-group > .form-control.is-invalid,
+.nb-auth-card .input-group > .form-control.is-valid {
+    z-index: 3;
+}
+
+.nb-pw-toggle {
+    min-width: 64px;
+}
+
+.nb-rules {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.25rem 1rem;
+    color: var(--nb-muted);
+}
+
+.nb-rules li {
+    transition: color 0.2s ease;
+}
+
+.nb-rules li.is-met {
+    color: #4ade80;
+    font-weight: 600;
+}
+
+:root[data-bs-theme="light"] .nb-rules li.is-met {
+    color: #15803d;
+}
+
+.nb-rule-icon {
+    display: inline-block;
+    width: 1em;
+}
+
+.nb-perks li {
+    display: flex;
+    gap: 0.6rem;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid var(--nb-border);
+}
+
+.nb-perks li:last-child {
+    border-bottom: 0;
+}
+
+.nb-profile-cover {
+    background:
+        radial-gradient(circle at 15% 20%, rgba(124, 58, 237, 0.35), transparent 55%),
+        radial-gradient(circle at 85% 80%, rgba(var(--nb-cyan-rgb), 0.25), transparent 55%),
+        var(--nb-panel);
+}
+
+.nb-profile-kicker {
+    color: var(--nb-heading);
+    letter-spacing: 0.08em;
+}
+
+.nb-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #ffffff;
+    background: linear-gradient(135deg, #7c3aed, #22d3ee);
+    box-shadow: 0 0 0 4px var(--nb-panel), 0 0 24px rgba(124, 58, 237, 0.55);
+    transition: transform 0.3s ease;
+}
+
+.nb-avatar:hover {
+    transform: rotate(-6deg) scale(1.05);
+}
+
+.nb-details dt {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--nb-muted);
+}
+
+.nb-details dd {
+    margin-bottom: 0.9rem;
+    font-size: 1.05rem;
+    overflow-wrap: anywhere;
+}
+
+.nb-details dd:last-child {
+    margin-bottom: 0;
+}
+
+/* game deals (cheapshark api) */
+.nb-deal-img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-bottom: 1px solid var(--nb-border);
+    border-radius: var(--bs-card-inner-border-radius) var(--bs-card-inner-border-radius) 0 0;
+    background: var(--nb-stripe);
+}
+
+.nb-deal-badge {
+    background: #15803d;
+    font-size: 0.85rem;
+}
+
+.nb-deal-old {
+    color: var(--nb-muted);
+    text-decoration: line-through;
+}
+
+.nb-deal-price {
+    font-size: 1.15rem;
+    color: var(--nb-heading);
+}
+
+.nb-deal-skeleton {
+    height: 270px;
+    border: 1px solid var(--nb-border);
+    background: linear-gradient(90deg, var(--nb-panel) 25%, var(--nb-row-hover) 50%, var(--nb-panel) 75%);
+    background-size: 200% 100%;
+    animation: nb-skeleton 1.2s ease-in-out infinite;
+}
+
+@keyframes nb-skeleton {
+    from { background-position: 200% 0; }
+    to { background-position: -200% 0; }
+}
+
+@media (max-width: 575.98px) {
+    .nb-rules {
+        grid-template-columns: 1fr;
+    }
+
+    .nb-avatar {
+        width: 80px;
+        height: 80px;
+        font-size: 1.8rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn,
+    .nb-nav-icon,
+    .nb-avatar {
+        transition: none;
+    }
+
+    .btn:hover:not(:disabled),
+    .btn:focus-visible,
+    #nav-account:hover .nb-nav-icon,
+    .nb-avatar:hover {
+        transform: none;
+    }
+
+    .nb-deal-skeleton {
+        animation: none;
     }
 }

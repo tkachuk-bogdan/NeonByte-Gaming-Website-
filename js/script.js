@@ -1,5 +1,3 @@
-/* assignment 6: jquery */
-
 function showToast(message, type) {
   let $box = $('#nb-toasts');
   if (!$box.length) {
@@ -52,7 +50,6 @@ function highlightText(text, query) {
   }).join('');
 }
 
-
 $(document).ready(function () {
   console.log('jQuery is ready!');
 
@@ -62,7 +59,6 @@ $(document).ready(function () {
   initCopyButtons();
   initLazyImages();
 });
-
 
 function initScrollProgress() {
   const $bar = $('<div class="nb-progress" aria-hidden="true"><div class="nb-progress-fill"></div></div>');
@@ -78,7 +74,6 @@ function initScrollProgress() {
   $(window).on('scroll resize', update);
   update();
 }
-
 
 function initFaqSearch() {
   const $input = $('#faq-search');
@@ -220,7 +215,6 @@ function initFaqSearch() {
   });
 }
 
-
 function initCounters() {
   const $counters = $('.nb-counter');
   if (!$counters.length) return;
@@ -250,7 +244,6 @@ function initCounters() {
   $(window).on('scroll resize', startVisible);
   startVisible();
 }
-
 
 function initCopyButtons() {
   const copyIcon = '<svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M5 15V6a2 2 0 0 1 2-2h8" fill="none" stroke="currentColor" stroke-width="2"/></svg>';
@@ -294,7 +287,6 @@ function initCopyButtons() {
     showToast('Copied to clipboard: ' + $(this).text().trim());
   });
 }
-
 
 function initLazyImages() {
   function loadVisible() {

@@ -1,16 +1,6 @@
-/* =========================================================
-   Assignment #4: Introduction to JavaScript
-   (updated in Assignment #5: theme-aware background colours,
-   popup accessibility, registration form sent with fetch + callbacks)
-   Team NeonByte: Bekzat Kuatbekov & Bogdan Tkachuk | Group: SE-2511
-   Uses SoundFX, sendFormData and API_URL from js/app.js
-   ========================================================= */
-
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ---------------------------------------------------------
-  // Task 5: Display Current Date & Time
-  // ---------------------------------------------------------
+  // date and time
   function updateDateTime() {
     const dateTimeEl = document.getElementById('current-date-time');
     if (!dateTimeEl) return;
@@ -28,13 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     dateTimeEl.textContent = now.toLocaleDateString('en-US', options);
   }
   updateDateTime();
-  setInterval(updateDateTime, 1000); // update every second
+  setInterval(updateDateTime, 1000);
 
-
-  // ---------------------------------------------------------
-  // Task 4: Dynamic Background Color Changer
-  // Each theme has its own palette, so the text stays readable.
-  // ---------------------------------------------------------
+  // background colour changer
   const bgPalettes = {
     dark: ['#12101c', '#0f172a', '#1e1b4b', '#172554', '#1f1938'],
     light: ['#f4f2fb', '#eef6ff', '#f5f0ff', '#effcf9', '#fff7ed']
@@ -51,11 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-  // ---------------------------------------------------------
-  // Task 3: Popup Subscription Modal Window
-  // (the subscribe form itself is handled in app.js)
-  // ---------------------------------------------------------
+  // newsletter popup open / close
   const modal = document.getElementById('popup-modal');
   const openModalBtn = document.getElementById('open-popup-btn');
   const closeModalBtn = document.getElementById('close-popup-btn');
@@ -70,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeModal() {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
-    openModalBtn.focus(); // give the focus back to the button that opened it
+    openModalBtn.focus();
   }
 
   if (openModalBtn && modal) {
@@ -81,7 +63,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeModalBtn.addEventListener('click', closeModal);
 
-    // Close when the dark area outside the window is clicked
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
         closeModal();
@@ -89,10 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-  // ---------------------------------------------------------
-  // Task 2: Accordion for FAQs
-  // ---------------------------------------------------------
+  // faq accordion
   const accordionHeaders = document.querySelectorAll('.custom-accordion-header');
 
   accordionHeaders.forEach(header => {
@@ -100,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const item = header.parentElement;
       const body = header.nextElementSibling;
 
-      // Close the other open items
       document.querySelectorAll('.custom-accordion-item').forEach(otherItem => {
         if (otherItem !== item) {
           otherItem.classList.remove('active');
@@ -108,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
-      // Toggle the clicked item
       item.classList.toggle('active');
       if (item.classList.contains('active')) {
         body.style.maxHeight = body.scrollHeight + 'px';
@@ -118,31 +94,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-
-  // ---------------------------------------------------------
-  // Task 1: Form Validation (contact.html)
-  // A5: a valid form is sent with fetch (no page reload) and
-  // the result is shown by a success or error callback.
-  // ---------------------------------------------------------
+  // registration form validation
   const contactForm = document.getElementById('js-validated-form');
 
   if (contactForm) {
     contactForm.addEventListener('submit', (e) => {
-      e.preventDefault(); // stop the normal page reload
+      e.preventDefault();
 
       let isValid = true;
 
-      // Fields
       const name = document.getElementById('val-name');
       const email = document.getElementById('val-email');
+      const phone = document.getElementById('val-phone');
       const password = document.getElementById('val-password');
       const confirmPassword = document.getElementById('val-confirm-password');
       const rules = document.getElementById('val-rules');
 
-      // Regular expression for an email address
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-      // 1. Name
       if (!name.value.trim()) {
         showError(name, 'Name or Gamer Tag is required');
         isValid = false;
@@ -150,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showSuccess(name);
       }
 
-      // 2. Email
       if (!email.value.trim()) {
         showError(email, 'Email address is required');
         isValid = false;
@@ -161,18 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
         showSuccess(email);
       }
 
-      // 3. Password (at least 8 characters)
-      if (!password.value) {
-        showError(password, 'Password is required');
-        isValid = false;
-      } else if (password.value.length < 8) {
-        showError(password, 'Password must be at least 8 characters long');
-        isValid = false;
-      } else {
-        showSuccess(password);
-      }
+      if (!Validate.check(phone, Validate.phone(phone.value))) isValid = false;
 
-      // 4. Confirm password
+      if (!Validate.check(password, Validate.password(password.value))) isValid = false;
+
       if (!confirmPassword.value) {
         showError(confirmPassword, 'Please confirm your password');
         isValid = false;
@@ -183,7 +143,6 @@ document.addEventListener('DOMContentLoaded', () => {
         showSuccess(confirmPassword);
       }
 
-      // 5. Club rules
       if (!rules.checked) {
         showError(rules, 'You must agree to the club rules');
         isValid = false;
@@ -200,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      // Everything is valid: send it without reloading the page
       const submitBtn = contactForm.querySelector('button[type="submit"]');
       showButtonSpinner(submitBtn);
 
@@ -208,24 +166,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const registration = {
         gamerTag: name.value.trim(),
         email: email.value.trim(),
+        phone: phone.value.trim(),
         game: document.getElementById('val-game').value,
         playStyle: contactForm.querySelector('input[name="play-style"]:checked').value,
         message: document.getElementById('val-message').value.trim()
       };
 
-      // a6: short delay simulates a server call
+      // short delay simulates a server call
       setTimeout(() => {
         sendFormData(API_URL, registration,
-          // success callback
           (result) => {
-            contactForm.reset(); // clears the fields (the reset handler below also removes the marks)
+            contactForm.reset();
             showMessage(messageBox, 'success',
               `Registration #${result.id} received! Welcome to the squad, ${registration.gamerTag}.`);
             showToast('Form submitted successfully!');
             SoundFX.play('success');
             enableSubmit(submitBtn);
           },
-          // error callback
           () => {
             showMessage(messageBox, 'danger', 'Could not send your registration. Check your connection and try again.');
             showToast('Registration was not sent.', 'error');
@@ -237,7 +194,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // "Clear" button (type="reset"): also remove the red / green marks and messages
   if (contactForm) {
     contactForm.addEventListener('reset', () => {
       contactForm.querySelectorAll('.is-invalid, .is-valid').forEach(el => el.classList.remove('is-invalid', 'is-valid'));
@@ -246,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Validation helpers
   function showError(input, message) {
     const parent = input.closest('.form-group-val') || input.parentElement;
     const errorEl = parent.querySelector('.error-text');

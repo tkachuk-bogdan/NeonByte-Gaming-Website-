@@ -1,30 +1,4 @@
-/* =========================================================
-   Assignment #5: Advanced JavaScript and DOM Manipulation
-   Team NeonByte: Bekzat Kuatbekov & Bogdan Tkachuk | Group: SE-2511
-
-   Contents
-   1. Helpers: safe localStorage + small DOM helper
-   2. Sound effects            - object with methods, no overlapping audio
-   3. Async form sending       - fetch POST + success / error callbacks
-   4. Day / Night theme switch - all pages
-   5. Keyboard navigation      - arrow keys in the navbar (keydown + switch)
-   6. Newsletter popup         - async submit, Escape closes it
-   7. Greeting by time of day  - switch statement (index.html)
-   8. "Read more" toggle       - style.display (about.html)
-   9. Tournament explorer      - objects, arrays, loops, higher-order
-                                 functions, filter with switch, fetch
-                                 "Load more" (games.html)
-   10. Rating stars            - querySelectorAll (games.html)
-
-   Every feature first checks that its elements exist, so the same
-   file can be loaded on every page without errors.
-   ========================================================= */
-
-/* ---------------------------------------------------------
-   1. Helpers
-   --------------------------------------------------------- */
-
-// localStorage can throw in private mode, so every access is wrapped
+// localstorage can throw in private mode
 function loadSetting(key, fallback) {
   try {
     const value = localStorage.getItem(key);
@@ -38,11 +12,9 @@ function saveSetting(key, value) {
   try {
     localStorage.setItem(key, value);
   } catch (error) {
-    // not saved - the feature still works for this visit
   }
 }
 
-// Creates an element with a class list and (safe) text content
 function createElement(tag, className, text) {
   const element = document.createElement(tag);
   if (className) element.className = className;
@@ -50,20 +22,14 @@ function createElement(tag, className, text) {
   return element;
 }
 
-// Plays a CSS animation class once (class is removed when it ends)
 function playAnimation(element, className) {
   element.classList.remove(className);
-  void element.offsetWidth; // restart the animation if it is already running
+  void element.offsetWidth; // restarts the animation
   element.classList.add(className);
   element.addEventListener('animationend', () => element.classList.remove(className), { once: true });
 }
 
-
-/* ---------------------------------------------------------
-   2. Sound effects
-   One Audio object per sound is cached. Before a sound starts,
-   every other sound is stopped, so sounds never overlap.
-   --------------------------------------------------------- */
+// sound effects: other sounds stop first, so they never overlap
 const SoundFX = {
   enabled: loadSetting('nb-sound', 'on') === 'on',
   files: {
@@ -82,13 +48,12 @@ const SoundFX = {
       this.cache[name].volume = 0.45;
     }
 
-    // stop whatever is playing right now
     Object.values(this.cache).forEach((audio) => {
       audio.pause();
       audio.currentTime = 0;
     });
 
-    // play() returns a Promise; browsers may block it before the first click
+    // play() can be blocked before the first click
     this.cache[name].play().catch(() => {});
   },
 
@@ -99,14 +64,7 @@ const SoundFX = {
   }
 };
 
-
-/* ---------------------------------------------------------
-   3. Async form sending with callbacks
-   JSONPlaceholder is a free test REST API: it accepts a POST
-   and answers with the same data plus a new "id".
-   onSuccess(result) / onError(error) are callback functions
-   given by the caller, so every form decides how to react.
-   --------------------------------------------------------- */
+// fetch post to a test api, the caller passes success / error callbacks
 const API_URL = 'https://jsonplaceholder.typicode.com/posts';
 
 function sendFormData(url, data, onSuccess, onError) {
@@ -125,21 +83,15 @@ function sendFormData(url, data, onSuccess, onError) {
     .catch((error) => onError(error));
 }
 
-
 document.addEventListener('DOMContentLoaded', () => {
 
-  /* ---------------------------------------------------------
-     4. Day / Night theme switch
-     Changes the data-bs-theme attribute on <html>; all colours in
-     style.css are CSS variables, so the whole page follows.
-     The button icon spins with style.transform.
-     --------------------------------------------------------- */
+  // day / night theme
   const themeButton = document.getElementById('theme-toggle');
   let themeRotation = 0;
 
   function applyTheme(theme) {
     document.documentElement.setAttribute('data-bs-theme', theme);
-    document.body.style.backgroundColor = ''; // reset the colour from the A4 "BG" button
+    document.body.style.backgroundColor = '';
     if (!themeButton) return;
     const isDay = theme === 'light';
     themeButton.textContent = isDay ? '☀️' : '🌙';
@@ -162,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Sound on / off button
   const soundButton = document.getElementById('sound-toggle');
 
   function showSoundState() {
@@ -176,16 +127,11 @@ document.addEventListener('DOMContentLoaded', () => {
     soundButton.addEventListener('click', () => {
       SoundFX.toggle();
       showSoundState();
-      SoundFX.play('click'); // only audible when sound was just turned on
+      SoundFX.play('click');
     });
   }
 
-
-  /* ---------------------------------------------------------
-     5. Keyboard navigation in the navbar
-     Arrow keys move the focus between menu items, Home / End
-     jump to the first / last item. A switch picks the action.
-     --------------------------------------------------------- */
+  // keyboard navigation in the navbar
   const menuItems = Array.from(document.querySelectorAll('.navbar-nav .nav-link, .navbar-nav .btn'));
 
   menuItems.forEach((item, index) => {
@@ -208,19 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
           nextIndex = menuItems.length - 1;
           break;
         default:
-          return; // every other key keeps its normal behaviour
+          return;
       }
 
-      event.preventDefault(); // stop the page from scrolling
+      event.preventDefault();
       menuItems[nextIndex].focus();
     });
   });
 
-
-  /* ---------------------------------------------------------
-     6. Newsletter popup: async submit + Escape key
-     (opening / closing on click is in main.js, Assignment 4)
-     --------------------------------------------------------- */
+  // newsletter popup
   const popup = document.getElementById('popup-modal');
   const newsletterForm = document.getElementById('newsletter-form');
   const newsletterEmail = document.getElementById('newsletter-email');
@@ -228,11 +170,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (popup && newsletterForm) {
     newsletterForm.addEventListener('submit', (event) => {
-      event.preventDefault(); // no page reload
+      event.preventDefault();
 
       const email = newsletterEmail.value.trim();
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        newsletterMessage.textContent = 'Please enter a valid email address.';
+        newsletterMessage.textContent = email ? 'Please enter a valid email, e.g. user@domain.com.' : 'Email address is required.';
         newsletterMessage.className = 'small mt-3 mb-0 text-danger';
         playAnimation(newsletterEmail, 'nb-shake');
         SoundFX.play('error');
@@ -249,7 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       sendFormData(API_URL, { email: email, list: 'weekly-brackets' },
-        // success callback
         () => {
           enableButton();
           newsletterMessage.textContent = `Subscribed! Weekly brackets will be sent to ${email}.`;
@@ -262,7 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
             newsletterMessage.textContent = '';
           }, 1800);
         },
-        // error callback
         () => {
           enableButton();
           newsletterMessage.textContent = 'Could not subscribe right now. Please check your connection and try again.';
@@ -272,7 +212,6 @@ document.addEventListener('DOMContentLoaded', () => {
       );
     });
 
-    // Escape closes the popup
     document.addEventListener('keydown', (event) => {
       if (event.key === 'Escape' && popup.classList.contains('active')) {
         document.getElementById('close-popup-btn').click();
@@ -280,11 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-  /* ---------------------------------------------------------
-     7. Greeting by time of day (index.html)
-     The day is split into four 6-hour parts: 0-5, 6-11, 12-17, 18-23.
-     --------------------------------------------------------- */
+  // greeting by time of day
   const greetingEl = document.getElementById('time-greeting');
 
   function getGreeting(hour) {
@@ -307,12 +242,7 @@ document.addEventListener('DOMContentLoaded', () => {
     playAnimation(greetingEl, 'nb-enter');
   }
 
-
-  /* ---------------------------------------------------------
-     8. "Read more" toggle (about.html)
-     The extra text is hidden with style.display = 'none' when the
-     page loads (without JavaScript it simply stays visible).
-     --------------------------------------------------------- */
+  // read more toggle
   const readMoreButton = document.getElementById('read-more-btn');
   const moreText = document.getElementById('club-story-more');
 
@@ -329,10 +259,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-
-  /* ---------------------------------------------------------
-     9. Tournament explorer (games.html)
-     --------------------------------------------------------- */
+  // tournament explorer
   const tournamentList = document.getElementById('tournament-list');
 
   if (tournamentList) {
@@ -348,7 +275,6 @@ document.addEventListener('DOMContentLoaded', () => {
       rpg: 'RPG & Co-op'
     };
 
-    // Starting data: an array of plain objects
     const startingTournaments = [
       { id: 1, title: 'NeonByte Clash', category: 'shooter', format: '5v5 Single Elimination', prize: 50000, date: '2026-11-07', slots: 16, registered: 12 },
       { id: 2, title: 'Grid Rivals Cup', category: 'racing', format: 'Time Trial + Final Race', prize: 30000, date: '2026-11-14', slots: 24, registered: 9 },
@@ -356,7 +282,6 @@ document.addEventListener('DOMContentLoaded', () => {
       { id: 4, title: 'Mid Lane Masters', category: 'moba', format: '5v5 Double Elimination', prize: 60000, date: '2026-11-28', slots: 8, registered: 5 }
     ];
 
-    // Turns plain data into a tournament object with its own methods
     function createTournament(data) {
       return {
         ...data,
@@ -376,7 +301,7 @@ document.addEventListener('DOMContentLoaded', () => {
           return this.registered >= this.slots;
         },
         join() {
-          if (this.isFull() || this.joined) return false; // a squad can join only once
+          if (this.isFull() || this.joined) return false;
           this.registered += 1;
           this.joined = true;
           return true;
@@ -384,10 +309,9 @@ document.addEventListener('DOMContentLoaded', () => {
       };
     }
 
-    let tournaments = startingTournaments.map(createTournament); // map = higher-order function
-    let currentFilter = 'all';
+    let tournaments = startingTournaments.map(createTournament);
+    let currentFilter = loadSetting('nb-filter', 'all');
 
-    // Decides if a tournament is shown for the chosen filter button
     function matchesFilter(tournament, filter) {
       switch (filter) {
         case 'all':
@@ -406,11 +330,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Builds one Bootstrap card from a tournament object
     function createTournamentCard(tournament, position) {
       const column = createElement('div', 'col-12 col-sm-6 col-xl-4');
       const card = createElement('article', 'card nb-card nb-tour-card h-100 nb-enter');
-      card.style.animationDelay = `${position * 80}ms`; // cards appear one after another
+      card.style.animationDelay = `${position * 80}ms`;
       if (tournament.isFull()) card.classList.add('is-full');
 
       const body = createElement('div', 'card-body d-flex flex-column p-3');
@@ -434,7 +357,6 @@ document.addEventListener('DOMContentLoaded', () => {
         : `${tournament.registered}/${tournament.slots} squads · ${tournament.getFreeSlots()} slots left`;
       const slots = createElement('p', 'small text-body-secondary mb-3', slotsText);
 
-      // Button text depends on the object's state
       let buttonText = 'Join tournament';
       if (tournament.joined) buttonText = 'Joined ✓';
       else if (tournament.isFull()) buttonText = 'Full';
@@ -451,9 +373,8 @@ document.addEventListener('DOMContentLoaded', () => {
       return column;
     }
 
-    // Draws the list for the current filter
     function renderTournaments() {
-      const visible = tournaments.filter((t) => matchesFilter(t, currentFilter)); // filter = higher-order function
+      const visible = tournaments.filter((t) => matchesFilter(t, currentFilter));
 
       tournamentList.innerHTML = '';
       for (let i = 0; i < visible.length; i++) {
@@ -464,14 +385,14 @@ document.addEventListener('DOMContentLoaded', () => {
         tournamentList.appendChild(createElement('p', 'text-body-secondary mb-0', 'No tournaments match this filter yet.'));
       }
 
-      const totalPrize = visible.reduce((sum, t) => sum + t.prize, 0); // reduce = higher-order function
+      const totalPrize = visible.reduce((sum, t) => sum + t.prize, 0);
       summaryEl.textContent = `Showing ${visible.length} of ${tournaments.length} tournaments · Total prize pool: ${totalPrize.toLocaleString('en-US')} KZT`;
     }
 
-    // Filter buttons
     filterButtons.forEach((button) => {
       button.addEventListener('click', () => {
         currentFilter = button.dataset.filter;
+        saveSetting('nb-filter', currentFilter);
         filterButtons.forEach((other) => {
           const isActive = other === button;
           other.classList.toggle('active', isActive);
@@ -482,7 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // "Join tournament" buttons - one listener on the list (event delegation)
+    // event delegation: one listener for every join button
     tournamentList.addEventListener('click', (event) => {
       const button = event.target.closest('[data-join]');
       if (!button) return;
@@ -496,7 +417,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // "Load more" button: fetch more tournaments from a JSON file without reloading
     loadMoreButton.addEventListener('click', () => {
       loadMoreButton.disabled = true;
       loadMoreButton.textContent = 'Loading...';
@@ -508,7 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .then((items) => {
           const newTournaments = items
-            .filter((item) => !tournaments.some((t) => t.id === item.id)) // skip ones we already have
+            .filter((item) => !tournaments.some((t) => t.id === item.id))
             .map(createTournament);
           tournaments = tournaments.concat(newTournaments);
           renderTournaments();
@@ -524,15 +444,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    filterButtons.forEach((button) => {
+      const isActive = button.dataset.filter === currentFilter;
+      button.classList.toggle('active', isActive);
+      button.setAttribute('aria-pressed', String(isActive));
+    });
     renderTournaments();
   }
 
-
-  /* ---------------------------------------------------------
-     10. Rating stars (games.html)
-     querySelectorAll selects all five stars; hovering previews a
-     rating, clicking saves it and updates the message.
-     --------------------------------------------------------- */
+  // rating stars
   const stars = document.querySelectorAll('.nb-star');
   const starsBox = document.querySelector('.nb-stars');
   const ratingMessage = document.getElementById('rating-message');
@@ -548,7 +468,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ];
     let currentRating = Number(loadSetting('nb-rating', '0'));
 
-    // Colours the first "value" stars
     function paintStars(value) {
       for (let i = 0; i < stars.length; i++) {
         stars[i].classList.toggle('is-on', i < value);
@@ -576,7 +495,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     starsBox.addEventListener('mouseleave', () => paintStars(currentRating));
 
-    if (currentRating > 0) setRating(currentRating); // show the saved rating
+    if (currentRating > 0) setRating(currentRating);
   }
 
 });

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NeonByte Gaming - Log In</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/theme-init.js"></script>
+  <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+  <script src="js/script.js"></script>
+</head>
+<body class="d-flex flex-column min-vh-100" data-page="login">
+
+<a class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2" href="#main">Skip to main content</a>
+
+<nav data-bs-theme="dark" class="navbar navbar-expand-lg bg-dark border-bottom border-2 border-primary sticky-top py-3" aria-label="Main navigation">
+  <div class="container">
+    <a class="navbar-brand fw-bold fs-4" href="index.html">Gaming<span class="text-info">Club</span></a>
+
+    <span id="current-date-time" class="badge bg-body-tertiary border border-secondary text-info ms-2 d-none d-md-inline-block d-lg-none d-xl-inline-block"></span>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav ms-auto gap-lg-2 mt-3 mt-lg-0 fw-semibold align-items-center">
+        <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="games.html">Games</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="contact.html">Join / Contact</a></li>
+        <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="media-queries.html">Media Queries</a></li>
+        <li class="nav-item"><a id="nav-account" aria-current="page" class="nav-link active rounded px-3 px-lg-2 px-xxl-3 d-inline-flex align-items-center gap-1" href="login.html"><svg class="nb-nav-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm0 1c-2.7 0-5 1.4-5 3.5V14h10v-1.5C13 10.4 10.7 9 8 9Z"/></svg><span class="nb-account-label">Log In</span></a></li>
+
+        <li class="nav-item ms-lg-2">
+          <button id="open-popup-btn" class="btn btn-outline-info btn-sm">Newsletter</button>
+        </li>
+
+        <li class="nav-item">
+          <button id="change-bg-btn" class="btn btn-primary btn-sm" title="Change Background Color">🎨 BG</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<main id="main" class="flex-grow-1">
+  <section class="bg-body-tertiary border-bottom py-4 py-md-5" aria-labelledby="login-title">
+    <div class="container px-3 px-sm-2 px-md-3">
+      <h1 id="login-title" class="display-6 fw-bold mb-2">Welcome Back, Player</h1>
+      <p class="lead mb-0">Log in to open your club profile.</p>
+    </div>
+  </section>
+
+  <div class="container px-3 px-sm-2 px-md-3 py-4 py-md-5">
+    <div class="row g-4 align-items-start">
+      <section class="col-12 col-lg-6" aria-labelledby="login-form-title">
+        <div class="bg-body-tertiary border rounded-3 p-3 p-md-4 nb-auth-card">
+          <h2 id="login-form-title" class="h4 mb-4">Log In</h2>
+          <div id="login-alert" class="d-none" role="alert" aria-live="polite"></div>
+          <form id="login-form" class="row g-3" novalidate>
+            <div class="col-12 form-group-val">
+              <label for="li-email" class="form-label fw-semibold">Email Address *</label>
+              <input type="text" class="form-control" id="li-email" placeholder="you@example.com" inputmode="email" autocomplete="email">
+              <div class="error-text"></div>
+            </div>
+            <div class="col-12 form-group-val">
+              <label for="li-password" class="form-label fw-semibold">Password *</label>
+              <div class="input-group">
+                <input type="password" class="form-control" id="li-password" placeholder="••••••••" autocomplete="current-password">
+                <button type="button" class="btn btn-outline-secondary nb-pw-toggle" data-toggle-password="li-password" aria-pressed="false" aria-label="Show or hide password">Show</button>
+              </div>
+              <div class="error-text"></div>
+            </div>
+            <div class="col-12 d-flex flex-wrap align-items-center gap-3">
+              <button type="submit" class="btn btn-primary btn-lg">Log In</button>
+              <span class="small text-body-secondary">New here? <a href="signup.html">Create an account</a></span>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <aside class="col-12 col-lg-6" aria-label="Club practice room">
+        <img src="images/gallery/g8.jpg" alt="Coaching and practice session graphic" class="img-fluid w-100 rounded-3 border mb-4">
+        <div class="card nb-card">
+          <div class="card-body p-4">
+            <h2 class="card-title h5">Why Log In?</h2>
+            <p class="card-text mb-0">Your profile keeps your details, your tournament rating and your last game deal search in one place.</p>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</main>
+
+<footer data-bs-theme="dark" class="bg-dark border-top border-2 border-primary text-center py-4 px-3 mt-auto">
+  <div class="container">
+    <p class="small text-body-secondary mb-1">&copy; 2026 NeonByte Gaming Club. Web Technologies Final Project.</p>
+    <p class="small text-body-secondary mb-0">Team Members: Bekzat Kuatbekov &amp; Bogdan Tkachuk</p>
+  </div>
+</footer>
+
+<div class="nb-dock" role="group" aria-label="Theme and sound settings">
+  <button type="button" id="theme-toggle" class="nb-dock-btn" aria-pressed="false" aria-label="Switch to day theme" title="Day / Night theme">🌙</button>
+  <button type="button" id="sound-toggle" class="nb-dock-btn" aria-pressed="true" aria-label="Turn sound off" title="Sound on / off">🔊</button>
+</div>
+
+<div id="popup-modal" class="popup-overlay" aria-hidden="true">
+  <div class="popup-content">
+    <button id="close-popup-btn" class="popup-close-btn" aria-label="Close">&times;</button>
+    <h3 class="h4 text-info mb-3">Join Gaming Club Newsletter</h3>
+    <p class="small text-body-secondary mb-3">Subscribe to get weekly tournament brackets and gaming news straight to your inbox.</p>
+    <form id="newsletter-form" novalidate>
+      <div class="mb-3">
+        <label for="newsletter-email" class="visually-hidden">Email address</label>
+        <input type="text" id="newsletter-email" class="form-control" placeholder="Enter your email" inputmode="email" autocomplete="email">
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Subscribe Now</button>
+      <p id="newsletter-message" class="small mt-3 mb-0" role="status" aria-live="polite"></p>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/validation.js"></script>
+<script src="js/app.js"></script>
+<script src="js/main.js"></script>
+<script src="js/auth.js"></script>
+</body>
+</html>

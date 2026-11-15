@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-bs-theme="dark">
 <head>
-  <!-- Assignment #5: Advanced JavaScript & DOM | Team: NeonByte | Group: SE-2511 | Page by: Bogdan Tkachuk -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NeonByte Gaming - Join / Contact</title>
@@ -15,12 +14,10 @@
 
 <a class="visually-hidden-focusable btn btn-primary position-absolute top-0 start-0 m-2" href="#main">Skip to main content</a>
 
-<!-- Task 5: Live Date & Time + Task 3/4 buttons in Navbar -->
 <nav data-bs-theme="dark" class="navbar navbar-expand-lg bg-dark border-bottom border-2 border-primary sticky-top py-3" aria-label="Main navigation">
   <div class="container">
     <a class="navbar-brand fw-bold fs-4" href="index.html">Gaming<span class="text-info">Club</span></a>
 
-    <!-- A4 Task 5: live date & time (shown on wide screens) -->
     <span id="current-date-time" class="badge bg-body-tertiary border border-secondary text-info ms-2 d-none d-md-inline-block d-lg-none d-xl-inline-block"></span>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
@@ -35,13 +32,12 @@
         <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="games.html">Games</a></li>
         <li class="nav-item"><a class="nav-link active rounded px-3 px-lg-2 px-xxl-3" aria-current="page" href="contact.html">Join / Contact</a></li>
         <li class="nav-item"><a class="nav-link rounded px-3 px-lg-2 px-xxl-3" href="media-queries.html">Media Queries</a></li>
+        <li class="nav-item"><a id="nav-account" class="nav-link rounded px-3 px-lg-2 px-xxl-3 d-inline-flex align-items-center gap-1" href="login.html"><svg class="nb-nav-icon" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path fill="currentColor" d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm0 1c-2.7 0-5 1.4-5 3.5V14h10v-1.5C13 10.4 10.7 9 8 9Z"/></svg><span class="nb-account-label">Log In</span></a></li>
 
-        <!-- A4 Task 3: open the newsletter popup -->
         <li class="nav-item ms-lg-2">
           <button id="open-popup-btn" class="btn btn-outline-info btn-sm">Newsletter</button>
         </li>
 
-        <!-- A4 Task 4: change the background colour -->
         <li class="nav-item">
           <button id="change-bg-btn" class="btn btn-primary btn-sm" title="Change Background Color">🎨 BG</button>
         </li>
@@ -61,7 +57,6 @@
   </div>
 
   <div class="row g-4">
-    <!-- Task 1: JS Validated Form -->
     <section class="col-12 col-lg-8" aria-labelledby="form-title">
       <div class="bg-body-tertiary border rounded-3 p-3 p-md-4">
         <h2 id="form-title" class="h3 mb-4">Registration Form</h2>
@@ -80,14 +75,21 @@
             <label for="val-email" class="form-label fw-semibold">Email Address *</label>
             <div class="input-group">
               <span class="input-group-text">@</span>
-              <input type="email" class="form-control" id="val-email" placeholder="you@example.com">
+              <input type="text" class="form-control" id="val-email" placeholder="you@example.com" inputmode="email" autocomplete="email">
             </div>
             <div class="error-text"></div>
           </div>
 
           <div class="col-12 col-md-6 form-group-val">
-            <label for="val-password" class="form-label fw-semibold">Password * (Min 8 chars)</label>
-            <input type="password" class="form-control" id="val-password" placeholder="••••••••">
+            <label for="val-phone" class="form-label fw-semibold">Phone Number *</label>
+            <input type="tel" class="form-control" id="val-phone" placeholder="+7 701 234 56 78" inputmode="tel" autocomplete="tel">
+            <div class="error-text"></div>
+          </div>
+
+          <div class="col-12 col-md-6 form-group-val">
+            <label for="val-password" class="form-label fw-semibold">Password *</label>
+            <input type="password" class="form-control" id="val-password" placeholder="••••••••" aria-describedby="val-password-hint">
+            <div id="val-password-hint" class="form-text">8+ characters with an uppercase letter, a lowercase letter and a number.</div>
             <div class="error-text"></div>
           </div>
 
@@ -97,7 +99,6 @@
             <div class="error-text"></div>
           </div>
 
-          <!-- Fields from Assignments 1 & 3 (dropdown, radio buttons, textarea) - optional -->
           <div class="col-12 col-md-6">
             <label for="val-game" class="form-label fw-semibold">Main Game Category</label>
             <select id="val-game" class="form-select">
@@ -181,18 +182,16 @@
 
 <footer data-bs-theme="dark" class="bg-dark border-top border-2 border-primary text-center py-4 px-3 mt-auto">
   <div class="container">
-    <p class="small text-body-secondary mb-1">&copy; 2026 NeonByte Gaming Club. Assignment #6 Project.</p>
+    <p class="small text-body-secondary mb-1">&copy; 2026 NeonByte Gaming Club. Web Technologies Final Project.</p>
     <p class="small text-body-secondary mb-0">Team Members: Bekzat Kuatbekov &amp; Bogdan Tkachuk</p>
   </div>
 </footer>
 
-<!-- Assignment 5: Day / Night theme + sound controls -->
 <div class="nb-dock" role="group" aria-label="Theme and sound settings">
   <button type="button" id="theme-toggle" class="nb-dock-btn" aria-pressed="false" aria-label="Switch to day theme" title="Day / Night theme">🌙</button>
   <button type="button" id="sound-toggle" class="nb-dock-btn" aria-pressed="true" aria-label="Turn sound off" title="Sound on / off">🔊</button>
 </div>
 
-<!-- A4 Task 3: newsletter popup (form is sent by js/app.js) -->
 <div id="popup-modal" class="popup-overlay" aria-hidden="true">
   <div class="popup-content">
     <button id="close-popup-btn" class="popup-close-btn" aria-label="Close">&times;</button>
@@ -201,7 +200,7 @@
     <form id="newsletter-form" novalidate>
       <div class="mb-3">
         <label for="newsletter-email" class="visually-hidden">Email address</label>
-        <input type="email" id="newsletter-email" class="form-control" placeholder="Enter your email" required>
+        <input type="text" id="newsletter-email" class="form-control" placeholder="Enter your email" inputmode="email" autocomplete="email">
       </div>
       <button type="submit" class="btn btn-primary w-100">Subscribe Now</button>
       <p id="newsletter-message" class="small mt-3 mb-0" role="status" aria-live="polite"></p>
@@ -210,7 +209,9 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/validation.js"></script>
 <script src="js/app.js"></script>
 <script src="js/main.js"></script>
+<script src="js/auth.js"></script>
 </body>
 </html>

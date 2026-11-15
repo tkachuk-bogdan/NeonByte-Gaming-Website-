@@ -1,11 +1,4 @@
-/* =========================================================
-   Assignment #3 - Part 1: CSS Media Queries (NO Bootstrap)
-   Mobile-first: base styles = mobile,
-   @media (min-width: 768px)  = tablet,
-   @media (min-width: 992px)  = desktop.
-   ========================================================= */
-
-/* Shared section box for this page */
+/* shared section box for this page */
 .mq-section {
     max-width: 1140px;
     margin: 0 auto;
@@ -16,7 +9,7 @@
     color: var(--nb-cyan);
 }
 
-/* Shows which breakpoint is active right now */
+/* shows which breakpoint is active right now */
 .mq-badge {
     display: inline-block;
     background-color: #7c3aed;
@@ -30,14 +23,14 @@
     content: "Mobile (< 768px)";
 }
 
-/* ---------- Task 1: Responsive Typography ---------- */
-/* Mobile (default): small fonts */
+/* responsive typography */
+/* mobile (default): small fonts */
 .mq-typography h1 { font-size: 1.75rem; }
 .mq-typography h2 { font-size: 1.25rem; }
 .mq-typography p,
 .mq-text        { font-size: 0.95rem; line-height: 1.6; }
 
-/* Tablet: medium fonts */
+/* tablet: medium fonts */
 @media (min-width: 768px) {
     .mq-typography h1 { font-size: 2.5rem; }
     .mq-typography h2 { font-size: 1.6rem; }
@@ -46,7 +39,7 @@
     .mq-badge::after { content: "Tablet (768px - 991px)"; }
 }
 
-/* Desktop: large fonts */
+/* desktop: large fonts */
 @media (min-width: 992px) {
     .mq-typography h1 { font-size: 3.25rem; }
     .mq-typography h2 { font-size: 2rem; }
@@ -55,14 +48,14 @@
     .mq-badge::after { content: "Desktop (992px and up)"; }
 }
 
-/* ---------- Task 2: Card group ---------- */
+/* card group */
 .mq-cards {
     display: flex;
     flex-wrap: wrap;
     gap: 1.5rem;
 }
 
-/* Mobile (default): cards stacked vertically, full width */
+/* mobile (default): cards stacked vertically, full width */
 .mq-card {
     flex: 0 0 100%;
     display: flex;
@@ -108,14 +101,14 @@
     color: var(--nb-bg);
 }
 
-/* Tablet: two cards in a row */
+/* tablet: two cards in a row */
 @media (min-width: 768px) {
     .mq-card {
         flex: 0 0 calc((100% - 1.5rem) / 2);
     }
 }
 
-/* Desktop: all three cards side by side */
+/* desktop: all three cards side by side */
 @media (min-width: 992px) {
     .mq-card {
         flex: 0 0 calc((100% - 3rem) / 3);
